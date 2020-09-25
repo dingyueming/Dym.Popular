@@ -26,6 +26,16 @@ namespace Dym.Popular.Domain
                                                     .AddJsonFile("appsettings.json", true, true);
             _config = builder.Build();
         }
+
+        /// <summary>
+        /// 连接字符串
+        /// </summary>
+        public static string ConnectionString => _config.GetConnectionString("MySql");
+
+
+        /// <summary>
+        /// jwt配置
+        /// </summary>
         public static class JWT
         {
             public static string Domain => _config["JWT:Domain"];
@@ -33,6 +43,16 @@ namespace Dym.Popular.Domain
             public static string SecurityKey => _config["JWT:SecurityKey"];
 
             public static int Expires => Convert.ToInt32(_config["JWT:Expires"]);
+        }
+
+        /// <summary>
+        /// Hangfire
+        /// </summary>
+        public static class Hangfire
+        {
+            public static string Login => _config["Hangfire:Login"];
+
+            public static string Password => _config["Hangfire:Password"];
         }
     }
 }

@@ -1,19 +1,22 @@
 ﻿using Dym.Popular.Application;
 using Dym.Popular.Domain;
 using Dym.Popular.EntityFrameworkCore.DbMigrations;
+using Dym.Popular.HttpApi.Hosts.Extensions;
+using Dym.Popular.Job;
 using Dym.Popular.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Text;
+using System.Linq;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
-
 
 namespace Dym.Popular.HttpApi.Hosts
 {
@@ -23,12 +26,24 @@ namespace Dym.Popular.HttpApi.Hosts
         typeof(PopularApplicationModule),
         typeof(PopularHttpApiModule),
         typeof(PopularSwaggerModule),
-        typeof(PopularEntityFrameworkCoreDbMigrationsModule)
+        typeof(PopularEntityFrameworkCoreDbMigrationsModule),
+        typeof(PopularJobModule)
         )]
     public class PopularHttpApiHostsModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            Configure<MvcOptions>(options =>
+            {
+                var filterMetadata = options.Filters.FirstOrDefault(x => x is ServiceFilterAttribute attribute && attribute.ServiceType.Equals(typeof(AbpExceptionFilter)));
+
+                // 移除 AbpExceptionFilter
+                options.Filters.Remove(filterMetadata);
+
+                // 添加自己实现的ExceptionFilter
+                options.Filters.Add(typeof(PopularExceptionFilter));
+            });
+
             // 跨域配置
             context.Services.AddCors(options =>
             {
@@ -89,7 +104,7 @@ namespace Dym.Popular.HttpApi.Hosts
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });          
+            });
         }
     }
 }

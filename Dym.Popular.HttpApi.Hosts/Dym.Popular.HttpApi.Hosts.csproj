@@ -17,6 +17,8 @@
 
     <ProjectReference Include="..\Dym.Popular.HttpApi\Dym.Popular.HttpApi.csproj" />
 
+    <ProjectReference Include="..\Dym.Popular.Job\Dym.Popular.Job.csproj" />
+
     <ProjectReference Include="..\Dym.Popular.Swagger\Dym.Popular.Swagger.csproj" />
   </ItemGroup>
 
