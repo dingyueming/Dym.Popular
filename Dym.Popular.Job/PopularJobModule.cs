@@ -10,9 +10,8 @@ using Volo.Abp.Modularity;
 namespace Dym.Popular.Job
 {
     [DependsOn(
-    //...other dependencies
-    typeof(AbpBackgroundJobsHangfireModule) //Add the new module dependency
-    )]
+        typeof(AbpBackgroundJobsHangfireModule)
+        )]
     public class PopularJobModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

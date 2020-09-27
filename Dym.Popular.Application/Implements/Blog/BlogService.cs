@@ -22,18 +22,7 @@ namespace Dym.Popular.Application.Implements.Blog
         public async Task<PopularResult<string>> InsertPostAsync(PostDto dto)
         {
             var result = new PopularResult<string>();
-
-            var entity = new Post
-            {
-                Title = dto.Title,
-                Author = dto.Author,
-                Url = dto.Url,
-                Html = dto.Html,
-                Markdown = dto.Markdown,
-                CategoryId = dto.CategoryId,
-                CreationTime = dto.CreationTime
-            };
-
+            var entity = ObjectMapper.Map<PostDto, Post>(dto);
             var post = await _postRepository.InsertAsync(entity);
             if (post == null)
             {
@@ -65,13 +54,7 @@ namespace Dym.Popular.Application.Implements.Blog
                 return result;
             }
 
-            post.Title = dto.Title;
-            post.Author = dto.Author;
-            post.Url = dto.Url;
-            post.Html = dto.Html;
-            post.Markdown = dto.Markdown;
-            post.CategoryId = dto.CategoryId;
-            post.CreationTime = dto.CreationTime;
+            post = ObjectMapper.Map<PostDto, Post>(dto);
 
             await _postRepository.UpdateAsync(post);
 
@@ -90,18 +73,7 @@ namespace Dym.Popular.Application.Implements.Blog
                 result.Failed("文章不存在");
                 return result;
             }
-
-            var dto = new PostDto
-            {
-                Title = post.Title,
-                Author = post.Author,
-                Url = post.Url,
-                Html = post.Html,
-                Markdown = post.Markdown,
-                CategoryId = post.CategoryId,
-                CreationTime = post.CreationTime
-            };
-
+            var dto = ObjectMapper.Map<Post, PostDto>(post);
             result.Success(dto);
             return result;
         }

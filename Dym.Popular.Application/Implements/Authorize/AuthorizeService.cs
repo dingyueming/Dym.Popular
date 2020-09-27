@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Dym.Popular.Application.Implements.Authorize
 {
-    public class AuthorizeService : IAuthorizeService
+    public class AuthorizeService : PopularAppService, IAuthorizeService
     {
         public async Task<PopularResult<string>> GenerateTokenAsync(string uid, string pwd)
         {
