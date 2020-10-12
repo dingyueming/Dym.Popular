@@ -14,7 +14,7 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations
             var configuration = BuildConfiguration();
 
             var builder = new DbContextOptionsBuilder<PopularMigrationsDbContext>()
-                .UseMySql(configuration.GetConnectionString("Default"));
+                .UseMySql(configuration.GetConnectionString("MySql"));
 
             return new PopularMigrationsDbContext(builder.Options);
         }

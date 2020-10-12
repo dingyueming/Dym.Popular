@@ -1,4 +1,5 @@
 ﻿using Dym.Popular.Domain.Entities.Blogs;
+using Dym.Popular.Domain.Entities.PopularSys;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
@@ -20,6 +21,10 @@ namespace Dym.Popular.EntityFrameworkCore
     public class PopularDbContext : AbpDbContext<PopularDbContext>
     {
         //public DbSet<AppUser> Users { get; set; }
+        public DbSet<UserEntity> User { get; set; }
+
+        public DbSet<RoleEntity> Role { get; set; }
+
         public DbSet<Post> Posts { get; set; }
 
         public DbSet<Category> Categories { get; set; }
@@ -30,6 +35,7 @@ namespace Dym.Popular.EntityFrameworkCore
 
         public DbSet<FriendLink> FriendLinks { get; set; }
 
+        
 
         /* Add DbSet properties for your Aggregate Roots / Entities here.
          * Also map them inside PopularDbContextModelCreatingExtensions.ConfigurePopular

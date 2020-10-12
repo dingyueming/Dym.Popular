@@ -8,15 +8,15 @@ namespace Dym.Popular.Domain.Shared.Blogs
     {
         public static class DbTableName
         {
-            public const string Posts = "Posts";
+            public const string Posts = "_Posts";
 
-            public const string Categories = "Categories";
+            public const string Categories = "_Categories";
 
-            public const string Tags = "Tags";
+            public const string Tags = "_Tags";
 
-            public const string PostTags = "Post_Tags";
+            public const string PostTags = "_Post_Tags";
 
-            public const string Friendlinks = "Friendlinks";
+            public const string Friendlinks = "_Friendlinks";
         }
         /// <summary>
         /// 博客分组

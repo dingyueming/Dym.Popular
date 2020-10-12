@@ -10,7 +10,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 {
     [DbContext(typeof(PopularMigrationsDbContext))]
-    [Migration("20200916090215_Initial")]
+    [Migration("20201012090638_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Dym.Popular.Domain.Blogs.Category", b =>
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.Blogs.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,10 +39,10 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppCategories");
+                    b.ToTable("App_Categories");
                 });
 
-            modelBuilder.Entity("Dym.Popular.Domain.Blogs.FriendLink", b =>
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.Blogs.FriendLink", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,10 +60,10 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppFriendlinks");
+                    b.ToTable("App_Friendlinks");
                 });
 
-            modelBuilder.Entity("Dym.Popular.Domain.Blogs.Post", b =>
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.Blogs.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,10 +99,10 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppPosts");
+                    b.ToTable("App_Posts");
                 });
 
-            modelBuilder.Entity("Dym.Popular.Domain.Blogs.PostTag", b =>
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.Blogs.PostTag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,10 +116,10 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppPost_Tags");
+                    b.ToTable("App_Post_Tags");
                 });
 
-            modelBuilder.Entity("Dym.Popular.Domain.Blogs.Tag", b =>
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.Blogs.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -137,7 +137,94 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppTags");
+                    b.ToTable("App_Tags");
+                });
+
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.PopularSys.RoleEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("Creator")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Remark")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RoleDescription")
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("varchar(20) CHARACTER SET utf8mb4")
+                        .HasMaxLength(20);
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("App_Role");
+                });
+
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.PopularSys.UserEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("Creator")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
+                        .HasMaxLength(100);
+
+                    b.Property<int?>("Modifier")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifyTime")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("RealName")
+                        .HasColumnType("varchar(20) CHARACTER SET utf8mb4")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Remark")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Telephone")
+                        .HasColumnType("varchar(11) CHARACTER SET utf8mb4")
+                        .HasMaxLength(11);
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("varchar(20) CHARACTER SET utf8mb4")
+                        .HasMaxLength(20);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("App_User");
                 });
 #pragma warning restore 612, 618
         }
