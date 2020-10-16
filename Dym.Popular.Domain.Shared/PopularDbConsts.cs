@@ -12,14 +12,14 @@ namespace Dym.Popular.Domain.Shared
         /// <summary>
         /// 用户表
         /// </summary>
-        public const string User = "_User";
+        public const string User = "_Popular_User";
         /// <summary>
         /// 角色表
         /// </summary>
-        public const string Role = "_Role";
+        public const string Role = "_Popular_Role";
         /// <summary>
         /// 菜单表
         /// </summary>
-        public const string Menu = "_Menu";
+        public const string Menu = "_Popular_Menu";
     }
 }

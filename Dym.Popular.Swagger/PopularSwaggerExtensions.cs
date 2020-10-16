@@ -17,7 +17,6 @@ namespace Dym.Popular.Swagger
                 ApiInfos.ForEach(x =>
                 {
                     options.SwaggerDoc(x.UrlPrefix, x.OpenApiInfo);
-                    options.DocumentFilter<SwaggerDocumentFilter>();
                 });
                 var security = new OpenApiSecurityScheme
                 {
@@ -67,6 +66,17 @@ namespace Dym.Popular.Swagger
                 {
                     new SwaggerApiInfo
                     {
+                        UrlPrefix = BlogGrouping.GroupName_Common,
+                        Name = "通用公共接口",
+                        OpenApiInfo = new OpenApiInfo
+                        {
+                            Version = version,
+                            Title = "通用公共接口",
+                            Description = description
+                        }
+                    },
+                    new SwaggerApiInfo
+                    {
                         UrlPrefix = BlogGrouping.GroupName_UI,
                         Name = "博客前台接口",
                         OpenApiInfo = new OpenApiInfo
@@ -89,23 +99,12 @@ namespace Dym.Popular.Swagger
                     },
                     new SwaggerApiInfo
                     {
-                        UrlPrefix = BlogGrouping.GroupName_Other,
-                        Name = "通用公共接口",
+                        UrlPrefix = BlogGrouping.GroupName_Mis,
+                        Name = "押运车辆车务综合信息管理系统接口",
                         OpenApiInfo = new OpenApiInfo
                         {
                             Version = version,
-                            Title = "通用公共接口",
-                            Description = description
-                        }
-                    },
-                    new SwaggerApiInfo
-                    {
-                        UrlPrefix = BlogGrouping.GroupName_Jwt,
-                        Name = "JWT授权接口",
-                        OpenApiInfo = new OpenApiInfo
-                        {
-                            Version = version,
-                            Title = "JWT授权接口",
+                            Title = "押运车辆车务综合信息管理系统接口",
                             Description = description
                         }
                     }

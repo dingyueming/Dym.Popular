@@ -1,4 +1,5 @@
-﻿using Dym.Popular.Domain.Shared.Result;
+﻿using Dym.Popular.Application.Contracts.Models;
+using Dym.Popular.Domain.Shared.Result;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -36,5 +37,11 @@ namespace Dym.Popular.Application.Contracts.Interface.Authorize
         /// <param name="access_token"></param>
         /// <returns></returns>
         Task<PopularResult<string>> GenerateTokenAsync(string uid, string pwd);
+
+        /// <summary>
+        /// 获取用户详细信息
+        /// </summary>
+        /// <returns></returns>
+        Task<PopularResult<UserInfo>> GetUserInfoAsync(string token);
     }
 }

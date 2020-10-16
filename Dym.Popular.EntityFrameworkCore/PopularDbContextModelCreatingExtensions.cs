@@ -1,5 +1,6 @@
 ﻿using Dym.Popular.Domain.Entities.Blogs;
 using Dym.Popular.Domain.Entities.PopularSys;
+using Dym.Popular.Domain.Entities.Mis;
 using Dym.Popular.Domain.Shared;
 using Dym.Popular.Domain.Shared.Blogs;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,7 @@ namespace Dym.Popular.EntityFrameworkCore
             Check.NotNull(builder, nameof(builder));
 
             /* Configure your own tables/entities inside here */
-
+            #region blog
             builder.Entity<Post>(b =>
             {
                 b.ToTable(PopularConsts.DbTablePrefix + BlogDbConsts.DbTableName.Posts);
@@ -52,7 +53,6 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.Property(x => x.PostId).HasColumnType("int").IsRequired();
                 b.Property(x => x.TagId).HasColumnType("int").IsRequired();
             });
-
             builder.Entity<FriendLink>(b =>
             {
                 b.ToTable(PopularConsts.DbTablePrefix + BlogDbConsts.DbTableName.Friendlinks);
@@ -60,6 +60,10 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.Property(x => x.Title).HasMaxLength(20).IsRequired();
                 b.Property(x => x.LinkUrl).HasMaxLength(100).IsRequired();
             });
+            #endregion
+
+            #region PopularSys
+
             //用户表
             builder.Entity<UserEntity>(b =>
             {
@@ -88,6 +92,45 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.Property(x => x.CreateTime).HasColumnType("datetime");
                 b.Property(x => x.Remark).HasColumnType("longtext");
             });
+
+            #endregion
+
+            #region Mis
+            //车辆表
+            builder.Entity<VehicleEntity>(b =>
+            {
+                b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.Vehicle);
+                b.HasKey(x => x.Id);
+                b.Property(x => x.License).HasMaxLength(20).IsRequired();
+                b.Property(x => x.Color).HasMaxLength(10);
+                b.Property(x => x.EngineNo).HasMaxLength(50);
+                b.Property(x => x.Vin).HasMaxLength(50);
+                b.Property(x => x.VehicleType).HasColumnType("int");
+                b.Property(x => x.Price).HasColumnType("decimal");
+                b.Property(x => x.PurchaseDate).HasColumnType("datetime");
+                b.Property(x => x.Remark).HasColumnType("longtext");
+                b.Property(x => x.Creator).HasColumnType("int");
+                b.Property(x => x.CreateTime).HasColumnType("datetime");
+            });
+            //驾驶员表
+            builder.Entity<DriverEntity>(b =>
+            {
+                b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.Driver);
+                b.HasKey(x => x.Id);
+                b.Property(x => x.Name).HasMaxLength(20).IsRequired();
+                b.Property(x => x.Sex).HasMaxLength(10).IsRequired();
+                b.Property(x => x.Birthday).HasColumnType("datetime");
+                b.Property(x => x.IdNo).HasMaxLength(18).IsRequired();
+                b.Property(x => x.Height).HasColumnType("int");
+                b.Property(x => x.Weight).HasColumnType("int");
+                b.Property(x => x.FileNo).HasMaxLength(12).IsRequired();
+                b.Property(x => x.Class).HasColumnType("int");
+                b.Property(x => x.FirstIssueDate).HasColumnType("datetime");
+                b.Property(x => x.Remark).HasColumnType("longtext");
+                b.Property(x => x.Creator).HasColumnType("int");
+                b.Property(x => x.CreateTime).HasColumnType("datetime");
+            });
+            #endregion
         }
     }
 }

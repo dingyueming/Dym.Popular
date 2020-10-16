@@ -13,26 +13,26 @@ namespace Dym.Popular.Domain.Entities.PopularSys
         /// <summary>
         /// 角色名称
         /// </summary>
-        public virtual string RoleName { get; set; }
+        public string RoleName { get; set; }
         /// <summary>
         /// 角色描述
         /// </summary>
-        public virtual string RoleDescription { get; set; }
+        public string RoleDescription { get; set; }
         /// <summary>
         /// 数据状态
         /// </summary>
-        public virtual int Status { get; set; }
+        public int Status { get; set; }
         /// <summary>
         /// 备注
         /// </summary>
-        public virtual string Remark { get; set; }
+        public string Remark { get; set; }
         /// <summary>
         /// 创建人
         /// </summary>
-        public virtual int Creator { get; set; }
+        public int Creator { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
-        public virtual DateTime CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
     }
 }

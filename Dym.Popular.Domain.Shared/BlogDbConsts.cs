@@ -34,14 +34,14 @@ namespace Dym.Popular.Domain.Shared.Blogs
             public const string GroupName_Admin = "v2";
 
             /// <summary>
-            /// 其他通用接口组
+            /// 项目通用接口组
             /// </summary>
-            public const string GroupName_Other = "v3";
+            public const string GroupName_Common = "v3";
 
             /// <summary>
-            /// JWT授权接口组
+            /// 押运车辆综合管理系统
             /// </summary>
-            public const string GroupName_Jwt = "v4";
+            public const string GroupName_Mis = "v5";
         }
     }
 }
