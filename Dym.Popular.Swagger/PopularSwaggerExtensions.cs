@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Dym.Popular.Domain.Entities.Blogs;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Collections.Generic;
+using System.Linq;
 using static Dym.Popular.Domain.Shared.Blogs.BlogDbConsts;
 
 namespace Dym.Popular.Swagger
@@ -30,6 +32,7 @@ namespace Dym.Popular.Swagger
                 options.OperationFilter<AddResponseHeadersFilter>();
                 options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
+                options.ResolveConflictingActions(x => x.First());
             });
         }
 
@@ -72,28 +75,6 @@ namespace Dym.Popular.Swagger
                         {
                             Version = version,
                             Title = "通用公共接口",
-                            Description = description
-                        }
-                    },
-                    new SwaggerApiInfo
-                    {
-                        UrlPrefix = BlogGrouping.GroupName_UI,
-                        Name = "博客前台接口",
-                        OpenApiInfo = new OpenApiInfo
-                        { 
-                            Version = version,
-                            Title = "博客前台接口",
-                            Description = description
-                        }
-                    },
-                    new SwaggerApiInfo
-                    {
-                        UrlPrefix = BlogGrouping.GroupName_Admin,
-                        Name = "博客后台接口",
-                        OpenApiInfo = new OpenApiInfo
-                        {
-                            Version = version,
-                            Title = "博客后台接口",
                             Description = description
                         }
                     },

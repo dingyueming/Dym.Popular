@@ -1,6 +1,8 @@
 ﻿using Dym.Popular.Application.Contracts.Dto.Mis;
+using Dym.Popular.Application.Contracts.Models;
 using Dym.Popular.Domain.Shared.Result;
 using System.Threading.Tasks;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 
 namespace Dym.Popular.Application.Contracts.Interface.Mis
@@ -11,8 +13,10 @@ namespace Dym.Popular.Application.Contracts.Interface.Mis
 
         Task<PopularResult> DeleteAsync(int id);
 
-        Task<PopularResult<string>> UpdateAsync(int id, VehicleDto dto);
+        Task<PopularResult<string>> UpdateAsync(VehicleDto dto);
 
         Task<PopularResult<VehicleDto>> GetAsync(int id);
+
+        Task<PopularResult<PagedResultDto<VehicleDto>>> GetListAsync(GetVehicleListDto input);
     }
 }

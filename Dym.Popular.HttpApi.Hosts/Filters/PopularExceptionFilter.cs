@@ -19,7 +19,6 @@ namespace Dym.Popular.HttpApi.Hosts.Extensions
         public void OnException(ExceptionContext context)
         {
             // 错误日志记录
-            //_log.Error($"{context.HttpContext.Request.Path}|{context.Exception.Message}", context.Exception);
             var result = new PopularResult()
             {
                 Code = PopularResultCodeEnum.Failed,

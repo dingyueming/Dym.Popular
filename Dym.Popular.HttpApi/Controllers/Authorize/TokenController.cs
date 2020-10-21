@@ -8,7 +8,7 @@ using static Dym.Popular.Domain.Shared.Blogs.BlogDbConsts;
 
 namespace Dym.Popular.HttpApi.Controllers.Authorize
 {
-
+    [AllowAnonymous]
     [ApiExplorerSettings(GroupName = BlogGrouping.GroupName_Common)]
     public class TokenController : PopularController
     {
@@ -20,10 +20,16 @@ namespace Dym.Popular.HttpApi.Controllers.Authorize
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public async Task<PopularResult<string>> Get([Required] string username, [Required] string password)
+        public async Task<PopularResult<string>> GetAsync([Required] string username, [Required] string password)
         {
             return await _authorizeService.GenerateTokenAsync(username, password);
+        }
+        [HttpPost]
+        public async Task<PopularResult<string>> PostAsync()
+        {
+            var result = new PopularResult<string>();
+            result.Success();
+            return await Task.FromResult(result);
         }
     }
 }

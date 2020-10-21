@@ -8,7 +8,7 @@ using static Dym.Popular.Domain.Shared.Blogs.BlogDbConsts;
 
 namespace Dym.Popular.HttpApi.Controllers.Authorize
 {
-
+    //[AllowAnonymous]
     [ApiExplorerSettings(GroupName = BlogGrouping.GroupName_Common)]
     public class UserInfoController : PopularController
     {

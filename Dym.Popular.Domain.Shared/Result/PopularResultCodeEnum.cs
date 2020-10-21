@@ -18,5 +18,10 @@ namespace Dym.Popular.Domain.Shared.Result
         /// 失败
         /// </summary>
         Failed = 1,
+
+        /// <summary>
+        /// 提示
+        /// </summary>
+        Notify = 2
     }
 }

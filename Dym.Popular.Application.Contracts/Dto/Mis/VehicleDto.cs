@@ -7,6 +7,10 @@ namespace Dym.Popular.Application.Contracts.Dto.Mis
     public class VehicleDto
     {
         /// <summary>
+        /// ID
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
         /// 车牌号
         /// </summary>
         public string License { get; set; }

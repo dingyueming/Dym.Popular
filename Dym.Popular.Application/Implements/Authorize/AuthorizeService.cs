@@ -66,7 +66,7 @@ namespace Dym.Popular.Application.Implements.Authorize
             //token转化
             var securityToken = new JwtSecurityTokenHandler().ReadToken(token).As<JwtSecurityToken>();
             //获取token中的用户ID
-            var id = securityToken.Claims.FirstOrDefault(x => x.Type == ClaimTypes.PrimarySid);
+            var id = securityToken.Claims.FirstOrDefault(x => x.Type == ClaimTypes.PrimarySid).Value;
 
             //根据name获取用户详细信息，以及权限等
 

@@ -20,11 +20,6 @@ namespace Dym.Popular.Domain.Shared.Result
         public string Message { get; set; }
 
         /// <summary>
-        /// 成功
-        /// </summary>
-        public bool IsSuccess => Code == PopularResultCodeEnum.Succeed;
-
-        /// <summary>
         /// 时间戳(毫秒)
         /// </summary>
         public long Timestamp => DateTimeOffset.Now.ToUnixTimeMilliseconds();
@@ -33,7 +28,6 @@ namespace Dym.Popular.Domain.Shared.Result
         /// 响应成功
         /// </summary>
         /// <param name="message"></param>
-        /// <param name="data"></param>
         /// <returns></returns>
         public void Success(string message = "")
         {
@@ -57,8 +51,6 @@ namespace Dym.Popular.Domain.Shared.Result
         /// 响应失败
         /// </summary>
         /// <param name="exexception></param>
-        /// <param name="data"></param>
-        /// <returns></returns>
         public void Failed(Exception exception)
         {
             Message = exception.InnerException?.StackTrace;

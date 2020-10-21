@@ -46,9 +46,9 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<PopularResult<string>> UpdateAsync([Required] int id, [FromBody] VehicleDto dto)
+        public async Task<PopularResult<string>> UpdateAsync([FromBody] VehicleDto dto)
         {
-            return await _vehicleService.UpdateAsync(id, dto);
+            return await _vehicleService.UpdateAsync(dto);
         }
 
         /// <summary>

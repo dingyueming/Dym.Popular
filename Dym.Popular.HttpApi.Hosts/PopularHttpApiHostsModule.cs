@@ -17,6 +17,7 @@ using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.Autofac;
+using Volo.Abp.Json;
 using Volo.Abp.Modularity;
 
 namespace Dym.Popular.HttpApi.Hosts
@@ -44,6 +45,12 @@ namespace Dym.Popular.HttpApi.Hosts
                 // 添加自己实现的ExceptionFilter
                 options.Filters.Add(typeof(PopularExceptionFilter));
             });
+            //时间格式化
+            Configure<MvcNewtonsoftJsonOptions>(options =>
+            {
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd";//对类型为DateTime的生效
+            });
+            Configure<AbpJsonOptions>(options => options.DefaultDateTimeFormat = "r");　　//对类型为DateTimeOffset生效
 
             // 路由配置
             context.Services.AddRouting(options =>
@@ -106,7 +113,6 @@ namespace Dym.Popular.HttpApi.Hosts
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
-
 
             // 路由
             app.UseRouting();
