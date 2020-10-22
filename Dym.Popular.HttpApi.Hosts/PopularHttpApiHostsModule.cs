@@ -2,6 +2,7 @@
 using Dym.Popular.Domain;
 using Dym.Popular.EntityFrameworkCore.DbMigrations;
 using Dym.Popular.HttpApi.Hosts.Extensions;
+using Dym.Popular.HttpApi.Hosts.Middleware;
 using Dym.Popular.Job;
 using Dym.Popular.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -113,6 +114,8 @@ namespace Dym.Popular.HttpApi.Hosts
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             // 路由
             app.UseRouting();

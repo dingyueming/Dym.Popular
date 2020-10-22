@@ -21,9 +21,5 @@
 
     <ProjectReference Include="..\Dym.Popular.Swagger\Dym.Popular.Swagger.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Middleware\" />
-  </ItemGroup>
 
 </Project>
