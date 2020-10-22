@@ -4,11 +4,11 @@ using Dym.Popular.Domain.Shared.Result;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using static Dym.Popular.Domain.Shared.Blogs.BlogDbConsts;
+using Dym.Popular.Domain.Shared;
 
 namespace Dym.Popular.HttpApi.Controllers.Mis
 {
-    [ApiExplorerSettings(GroupName = BlogGrouping.GroupName_Mis)]
+    [ApiExplorerSettings(GroupName = ApiGrouping.GroupName_Mis)]
     public class VehicleController : PopularController
     {
         private readonly IVehicleService _vehicleService;

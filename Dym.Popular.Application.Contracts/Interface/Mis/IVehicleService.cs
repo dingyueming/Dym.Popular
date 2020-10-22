@@ -17,6 +17,8 @@ namespace Dym.Popular.Application.Contracts.Interface.Mis
 
         Task<PopularResult<VehicleDto>> GetAsync(int id);
 
-        Task<PopularResult<PagedResultDto<VehicleDto>>> GetListAsync(GetVehicleListDto input);
+        Task<PopularResult<PagedResultDto<VehicleDto>>> GetListAsync(VehicleGetListDto input);
+
+        Task<PopularResult<byte[]>> GetBytes(VehicleGetListDto input);
     }
 }

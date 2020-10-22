@@ -3,8 +3,10 @@ using Dym.Popular.Application.Contracts.Interface.Mis;
 using Dym.Popular.Domain.Entities.Mis;
 using Dym.Popular.Domain.IRepositories.Mis;
 using Dym.Popular.Domain.Shared.Result;
+using Dym.Popular.Utils.EPPlus;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
@@ -65,7 +67,7 @@ namespace Dym.Popular.Application.Implements.Mis
             return result;
         }
 
-        public async Task<PopularResult<PagedResultDto<VehicleDto>>> GetListAsync(GetVehicleListDto input)
+        public async Task<PopularResult<PagedResultDto<VehicleDto>>> GetListAsync(VehicleGetListDto input)
         {
             var result = new PopularResult<PagedResultDto<VehicleDto>>();
 
@@ -79,6 +81,23 @@ namespace Dym.Popular.Application.Implements.Mis
 
             var dtos = ObjectMapper.Map<List<VehicleEntity>, List<VehicleDto>>(vehicles);
             result.Success(new PagedResultDto<VehicleDto>(totalCount, dtos));
+            return result;
+        }
+
+        public async Task<PopularResult<byte[]>> GetBytes(VehicleGetListDto input)
+        {
+            var result = new PopularResult<byte[]>();
+
+            var queryAble = _vehicleRepository
+                  .WhereIf(!input.License.IsNullOrWhiteSpace(), vehicle => vehicle.License.Contains(input.License))
+                  .WhereIf(!input.Vin.IsNullOrWhiteSpace(), vehicle => vehicle.Vin.Contains(input.Vin));
+
+            var vehicles = await AsyncExecuter.ToListAsync(queryAble);
+
+            var stream = EPPlusHelper.GetMemoryStream(vehicles);
+
+            result.Success(stream.ToArray());
+
             return result;
         }
     }

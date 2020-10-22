@@ -4,11 +4,11 @@ using Dym.Popular.Domain.Shared.Result;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using static Dym.Popular.Domain.Shared.Blogs.BlogDbConsts;
+using Dym.Popular.Domain.Shared;
 
 namespace Dym.Popular.HttpApi.Controllers.Blog
 {
-    [ApiExplorerSettings(GroupName = BlogGrouping.GroupName_UI)]
+    [ApiExplorerSettings(GroupName = ApiGrouping.GroupName_UI)]
     public class BlogController : PopularController
     {
         private readonly IBlogService _blogService;

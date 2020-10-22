@@ -6,7 +6,7 @@ using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Collections.Generic;
 using System.Linq;
-using static Dym.Popular.Domain.Shared.Blogs.BlogDbConsts;
+using Dym.Popular.Domain.Shared;
 
 namespace Dym.Popular.Swagger
 {
@@ -69,7 +69,7 @@ namespace Dym.Popular.Swagger
                 {
                     new SwaggerApiInfo
                     {
-                        UrlPrefix = BlogGrouping.GroupName_Common,
+                        UrlPrefix = ApiGrouping.GroupName_Common,
                         Name = "通用公共接口",
                         OpenApiInfo = new OpenApiInfo
                         {
@@ -80,7 +80,7 @@ namespace Dym.Popular.Swagger
                     },
                     new SwaggerApiInfo
                     {
-                        UrlPrefix = BlogGrouping.GroupName_Mis,
+                        UrlPrefix = ApiGrouping.GroupName_Mis,
                         Name = "押运车辆车务综合信息管理系统接口",
                         OpenApiInfo = new OpenApiInfo
                         {

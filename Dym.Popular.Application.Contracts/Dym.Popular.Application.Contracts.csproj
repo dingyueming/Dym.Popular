@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dym.Popular.Domain.Shared\Dym.Popular.Domain.Shared.csproj" />
+    <ProjectReference Include="..\Dym.Popular.Utils\Dym.Popular.Utils.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -13,5 +13,6 @@
     <ProjectReference Include="..\Dym.Popular.Application.Contracts\Dym.Popular.Application.Contracts.csproj" />
     <ProjectReference Include="..\Dym.Popular.Domain.Shared\Dym.Popular.Domain.Shared.csproj" />
     <ProjectReference Include="..\Dym.Popular.Domain\Dym.Popular.Domain.csproj" />
+    <ProjectReference Include="..\Dym.Popular.Utils\Dym.Popular.Utils.csproj" />
   </ItemGroup>
 </Project>

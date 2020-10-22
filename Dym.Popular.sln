@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dym.Popular.Swagger", "Dym.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dym.Popular.HttpApi.Hosts", "Dym.Popular.HttpApi.Hosts\Dym.Popular.HttpApi.Hosts.csproj", "{1C7CA6EC-4774-4B5E-A077-CB4EB1C71980}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dym.Popular.Job", "Dym.Popular.Job\Dym.Popular.Job.csproj", "{05B1A402-71A0-4382-8AF5-DCF501DB90B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dym.Popular.Job", "Dym.Popular.Job\Dym.Popular.Job.csproj", "{05B1A402-71A0-4382-8AF5-DCF501DB90B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dym.Popular.Utils", "Dym.Popular.Utils\Dym.Popular.Utils.csproj", "{23CCC0F3-277A-447B-B805-79E5A8B6A92A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{05B1A402-71A0-4382-8AF5-DCF501DB90B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05B1A402-71A0-4382-8AF5-DCF501DB90B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05B1A402-71A0-4382-8AF5-DCF501DB90B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23CCC0F3-277A-447B-B805-79E5A8B6A92A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23CCC0F3-277A-447B-B805-79E5A8B6A92A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23CCC0F3-277A-447B-B805-79E5A8B6A92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23CCC0F3-277A-447B-B805-79E5A8B6A92A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

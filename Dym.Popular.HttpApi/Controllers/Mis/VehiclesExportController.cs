@@ -10,11 +10,11 @@ using Dym.Popular.Domain.Shared;
 namespace Dym.Popular.HttpApi.Controllers.Mis
 {
     [ApiExplorerSettings(GroupName = ApiGrouping.GroupName_Mis)]
-    public class VehiclesController : PopularController
+    public class VehiclesExportController : PopularController
     {
         private readonly IVehicleService _vehicleService;
 
-        public VehiclesController(IVehicleService vehicleService)
+        public VehiclesExportController(IVehicleService vehicleService)
         {
             _vehicleService = vehicleService;
         }
@@ -28,9 +28,9 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         /// <param name="vin"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PopularResult<PagedResultDto<VehicleDto>>> GetAsync(int page, int limit, string license, string vin)
+        public async Task<PopularResult<byte[]>> GetAsync(int page, int limit, string license, string vin)
         {
-            return await _vehicleService.GetListAsync(new VehicleGetListDto()
+            return await _vehicleService.GetBytes(new VehicleGetListDto()
             {
                 SkipCount = (page - 1) * limit,
                 MaxResultCount = limit,

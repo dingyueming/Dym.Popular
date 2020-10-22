@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using static Dym.Popular.Domain.Shared.Blogs.BlogDbConsts;
+using Dym.Popular.Domain.Shared;
 
 namespace Dym.Popular.HttpApi.Controllers.Authorize
 {
     [AllowAnonymous]
-    [ApiExplorerSettings(GroupName = BlogGrouping.GroupName_Common)]
+    [ApiExplorerSettings(GroupName = ApiGrouping.GroupName_Common)]
     public class TokenController : PopularController
     {
         private readonly IAuthorizeService _authorizeService;

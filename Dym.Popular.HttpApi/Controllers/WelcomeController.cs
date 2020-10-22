@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using static Dym.Popular.Domain.Shared.Blogs.BlogDbConsts;
+using Dym.Popular.Domain.Shared;
 
 namespace Dym.Popular.HttpApi.Controllers
 {
-    [ApiExplorerSettings(GroupName = BlogGrouping.GroupName_Common)]
+    [ApiExplorerSettings(GroupName = ApiGrouping.GroupName_Common)]
     [AllowAnonymous]
     public class WelcomeController : PopularController
     {
