@@ -46,11 +46,8 @@ namespace Dym.Popular.HttpApi.Hosts
                 // 添加自己实现的ExceptionFilter
                 options.Filters.Add(typeof(PopularExceptionFilter));
             });
+
             //时间格式化
-            Configure<MvcNewtonsoftJsonOptions>(options =>
-            {
-                options.SerializerSettings.DateFormatString = "yyyy-MM-dd";//对类型为DateTime的生效
-            });
             Configure<AbpJsonOptions>(options => options.DefaultDateTimeFormat = "r");　　//对类型为DateTimeOffset生效
 
             // 路由配置

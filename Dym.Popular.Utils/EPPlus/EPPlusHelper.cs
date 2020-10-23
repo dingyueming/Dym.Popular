@@ -34,16 +34,22 @@ namespace Dym.Popular.Utils.EPPlus
                 //worksheet.Cells["A1"].Value = "单元格的值";直接指定单元格进行赋值
                 worksheet.Cells.Style.Font.Name = "微软雅黑";
                 worksheet.Cells.Style.Font.Size = 12;
-                worksheet.Cells.Style.ShrinkToFit = true;//单元格自动适应大小
+                //worksheet.Cells.Style.ShrinkToFit = true;//单元格自动适应大小
 
-
+                //第一行设置为table的列头
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    worksheet.Cells[1, i + 1].Value = dt.Columns[i].ColumnName;
+                }
+                //table内容
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     for (int j = 0; j < dt.Columns.Count; j++)
                     {
-                        worksheet.Cells[i + 1, j + 1].Value = dt.Rows[i][j].ToString();
+                        worksheet.Cells[i + 2, j + 1].Value = dt.Rows[i][j].ToString();
                     }
                 }
+                //设置样式
                 using (var cell = worksheet.Cells[1, 1, 1, dt.Columns.Count])
                 {
                     //设置样式:首行居中加粗背景色
@@ -52,7 +58,7 @@ namespace Dym.Popular.Utils.EPPlus
                     cell.Style.VerticalAlignment = ExcelVerticalAlignment.Center;     //垂直居中
                     cell.Style.Font.Size = 14;
                     cell.Style.Fill.PatternType = ExcelFillStyle.Solid;  //背景颜色
-                    cell.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(128, 128, 128));//设置单元格背景色
+                    cell.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(204, 232, 207));//设置单元格背景色
                 }
 
                 //保存
@@ -117,10 +123,17 @@ namespace Dym.Popular.Utils.EPPlus
                 {
                     colType = colType.GetGenericArguments()[0];
                 }
-                //添加列明及对应类型 
-
+                //添加列名及对应类型 
                 {
-                    dt.Columns.Add(item.Name, colType);
+                    var attribute = item.GetCustomAttribute<ExportExcelAttribute>();
+                    if (attribute != null)
+                    {
+                        dt.Columns.Add(attribute.ColumnName, colType);
+                    }
+                    else
+                    {
+                        dt.Columns.Add(item.Name, colType);
+                    }
                 }
 
             }
@@ -138,7 +151,13 @@ namespace Dym.Popular.Utils.EPPlus
                     {
                         continue;
                     }
-                    dr[proInfo.Name] = obj;
+                    var columnName = proInfo.Name;
+                    var attribute = proInfo.GetCustomAttribute<ExportExcelAttribute>();
+                    if (attribute != null)
+                    {
+                        columnName = attribute.ColumnName;
+                    }
+                    dr[columnName] = obj;
                 }
                 dt.Rows.Add(dr);
             }

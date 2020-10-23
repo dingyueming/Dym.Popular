@@ -12,7 +12,7 @@ namespace Dym.Popular.Domain.Shared.Result
         /// <summary>
         /// 返回结果
         /// </summary>
-        public T Result { get; set; }
+        public T Data { get; set; }
 
         /// <summary>
         /// 响应成功
@@ -23,7 +23,7 @@ namespace Dym.Popular.Domain.Shared.Result
         {
             Message = message;
             Code = PopularResultCodeEnum.Succeed;
-            Result = result;
+            Data = result;
         }
     }
 }

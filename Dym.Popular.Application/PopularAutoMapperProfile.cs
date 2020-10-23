@@ -18,6 +18,7 @@ namespace Dym.Popular.Application
             CreateMap<PostDto, Post>().ForMember(x => x.Id, opt => opt.Ignore());
 
             CreateMap<VehicleEntity, VehicleDto>();
+            CreateMap<VehicleEntity, VehicleExportDto>();
             CreateMap<VehicleDto, VehicleEntity>();
 
             CreateMap<DriverEntity, DriverDto>();

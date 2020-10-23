@@ -10,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Domain.Repositories;
 
 namespace Dym.Popular.Application.Implements.Mis
 {
@@ -67,15 +68,15 @@ namespace Dym.Popular.Application.Implements.Mis
             return result;
         }
 
-        public async Task<PopularResult<PagedResultDto<VehicleDto>>> GetListAsync(VehicleGetListDto input)
+        public async Task<PopularResult<PagedResultDto<VehicleDto>>> GetListAsync(VehicleGetListDto dto)
         {
             var result = new PopularResult<PagedResultDto<VehicleDto>>();
 
             var queryAble = _vehicleRepository
-                  .WhereIf(!input.License.IsNullOrWhiteSpace(), vehicle => vehicle.License.Contains(input.License))
-                  .WhereIf(!input.Vin.IsNullOrWhiteSpace(), vehicle => vehicle.Vin.Contains(input.Vin));
+                  .WhereIf(!dto.License.IsNullOrWhiteSpace(), vehicle => vehicle.License.Contains(dto.License))
+                  .WhereIf(!dto.Vin.IsNullOrWhiteSpace(), vehicle => vehicle.Vin.Contains(dto.Vin));
 
-            var vehicles = await AsyncExecuter.ToListAsync(queryAble.PageBy(input.SkipCount, input.MaxResultCount));
+            var vehicles = await AsyncExecuter.ToListAsync(queryAble.PageBy(dto.SkipCount, dto.MaxResultCount));
 
             var totalCount = await AsyncExecuter.CountAsync(queryAble);
 
@@ -84,20 +85,31 @@ namespace Dym.Popular.Application.Implements.Mis
             return result;
         }
 
-        public async Task<PopularResult<byte[]>> GetBytes(VehicleGetListDto input)
+        public async Task<PopularResult<byte[]>> GetBytesAsync(VehicleGetListDto dto)
         {
             var result = new PopularResult<byte[]>();
 
             var queryAble = _vehicleRepository
-                  .WhereIf(!input.License.IsNullOrWhiteSpace(), vehicle => vehicle.License.Contains(input.License))
-                  .WhereIf(!input.Vin.IsNullOrWhiteSpace(), vehicle => vehicle.Vin.Contains(input.Vin));
+                  .WhereIf(!dto.License.IsNullOrWhiteSpace(), vehicle => vehicle.License.Contains(dto.License))
+                  .WhereIf(!dto.Vin.IsNullOrWhiteSpace(), vehicle => vehicle.Vin.Contains(dto.Vin));
 
             var vehicles = await AsyncExecuter.ToListAsync(queryAble);
 
-            var stream = EPPlusHelper.GetMemoryStream(vehicles);
+            //转换为导出对象
+            var dtos = ObjectMapper.Map<List<VehicleEntity>, List<VehicleExportDto>>(vehicles);
+
+            var stream = EPPlusHelper.GetMemoryStream(dtos);
 
             result.Success(stream.ToArray());
 
+            return result;
+        }
+
+        public async Task<PopularResult> BatchInsertAsync(List<VehicleDto> dto)
+        {
+            var result = new PopularResult();
+            var vehicles = ObjectMapper.Map<List<VehicleDto>, List<VehicleEntity>>(dto);
+            await _vehicleRepository.BulkInsertAsync(vehicles);
             return result;
         }
     }

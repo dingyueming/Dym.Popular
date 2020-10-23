@@ -101,7 +101,8 @@ namespace Dym.Popular.EntityFrameworkCore
             {
                 b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.Vehicle);
                 b.HasKey(x => x.Id);
-                b.Property(x => x.License).HasMaxLength(20).IsRequired();
+                b.HasIndex(x => x.License).IsUnique();
+                //b.Property(x => x.License).HasMaxLength(20).IsRequired();
                 b.Property(x => x.Color).HasMaxLength(10);
                 b.Property(x => x.EngineNo).HasMaxLength(50);
                 b.Property(x => x.Vin).HasMaxLength(50);

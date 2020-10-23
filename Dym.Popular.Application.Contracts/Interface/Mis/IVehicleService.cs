@@ -1,6 +1,7 @@
 ﻿using Dym.Popular.Application.Contracts.Dto.Mis;
 using Dym.Popular.Application.Contracts.Models;
 using Dym.Popular.Domain.Shared.Result;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
@@ -17,8 +18,10 @@ namespace Dym.Popular.Application.Contracts.Interface.Mis
 
         Task<PopularResult<VehicleDto>> GetAsync(int id);
 
-        Task<PopularResult<PagedResultDto<VehicleDto>>> GetListAsync(VehicleGetListDto input);
+        Task<PopularResult<PagedResultDto<VehicleDto>>> GetListAsync(VehicleGetListDto dto);
 
-        Task<PopularResult<byte[]>> GetBytes(VehicleGetListDto input);
+        Task<PopularResult<byte[]>> GetBytesAsync(VehicleGetListDto dto);
+
+        Task<PopularResult> BatchInsertAsync(List<VehicleDto> dto);
     }
 }
