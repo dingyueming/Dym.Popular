@@ -26,6 +26,8 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         [HttpPost]
         public async Task<PopularResult<string>> InsertAsync([FromBody] VehicleDto dto)
         {
+            dto.Creator = LoginUser.Id;
+            dto.CreateTime = LoginUser.SysteDate;
             return await _vehicleService.InsertAsync(dto);
         }
         /// <summary>
