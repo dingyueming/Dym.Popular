@@ -18,6 +18,10 @@ namespace Dym.Popular.Domain.Shared
         /// </summary>
         public const string Driver = "_Mis_Driver";
         /// <summary>
+        /// 单位表（基地）
+        /// </summary>
+        public const string Unit = "_Mis_Unit";
+        /// <summary>
         /// 消费表
         /// </summary>
         public const string Menu = "_Mis_Cost";

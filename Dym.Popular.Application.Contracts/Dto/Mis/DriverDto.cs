@@ -1,15 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AutoMapper;
+using Dym.Popular.Utils.EPPlus;
+using System;
 
 namespace Dym.Popular.Application.Contracts.Dto.Mis
 {
-    public class DriverDto
+    public class DriverDto : PopularBaseEntityDto<int>
     {
         /// <summary>
         /// 姓名
         /// </summary>
+        [EPPlusColumn("")]
         public string Name { get; set; }
+        /// <summary>
+        /// 单位
+        /// </summary>
+        public int UnitId { get; set; }
+        /// <summary>
+        /// 单位
+        /// </summary>
+        [IgnoreMap]
+        [EPPlusColumn("单位")]
+        public string UnitName { get => Unit == null ? "" : Unit.Name; set => UnitName = value; }
+        /// <summary>
+        /// 单位
+        /// </summary>
+        [IgnoreMap]
+        public UnitDto Unit { get; set; }
+        /// <summary>
+        /// 入职时间
+        /// </summary>
+        [EPPlusColumn("Hiredate")]
+        public DateTime Hiredate { get; set; }
+        /// <summary>
+        /// 员工状态
+        /// </summary>
+        public int Status { get; set; }
+        /// <summary>
+        /// 联系地址
+        /// </summary>
+        public string Address { get; set; }
         /// <summary>
         /// 性别
         /// </summary>
@@ -42,18 +71,5 @@ namespace Dym.Popular.Application.Contracts.Dto.Mis
         /// 初始领证日期
         /// </summary>
         public DateTime FirstIssueDate { get; set; }
-        /// <summary>
-        /// 备注
-        /// </summary>
-        public string Remark { get; set; }
-        /// <summary>
-        /// 创建人
-        /// </summary>
-        public int Creator { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime CreateTime { get; set; }
-
     }
 }

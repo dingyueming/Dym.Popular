@@ -1,8 +1,5 @@
-﻿using Dym.Popular.Domain.Entities.Blogs;
-using Dym.Popular.Domain.Entities.Mis;
-using System;
+﻿using Dym.Popular.Domain.Entities.Mis;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 

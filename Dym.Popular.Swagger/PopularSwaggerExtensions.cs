@@ -1,4 +1,4 @@
-﻿using Dym.Popular.Domain.Entities.Blogs;
+﻿using Dym.Popular.Domain.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -6,7 +6,6 @@ using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Collections.Generic;
 using System.Linq;
-using Dym.Popular.Domain.Shared;
 
 namespace Dym.Popular.Swagger
 {

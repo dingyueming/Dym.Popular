@@ -1,8 +1,6 @@
-﻿using Dym.Popular.Domain.Entities.Blogs;
-using Dym.Popular.Domain.Entities.PopularSys;
+﻿using Dym.Popular.Domain.Entities.PopularSys;
 using Dym.Popular.Domain.Entities.Mis;
 using Dym.Popular.Domain.Shared;
-using Dym.Popular.Domain.Shared.Blogs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using Volo.Abp;
@@ -16,51 +14,6 @@ namespace Dym.Popular.EntityFrameworkCore
             Check.NotNull(builder, nameof(builder));
 
             /* Configure your own tables/entities inside here */
-            #region blog
-            builder.Entity<Post>(b =>
-            {
-                b.ToTable(PopularConsts.DbTablePrefix + BlogDbConsts.DbTableName.Posts);
-                b.HasKey(x => x.Id);
-                b.Property(x => x.Title).HasMaxLength(200).IsRequired();
-                b.Property(x => x.Author).HasMaxLength(10);
-                b.Property(x => x.Url).HasMaxLength(100).IsRequired();
-                b.Property(x => x.Html).HasColumnType("longtext").IsRequired();
-                b.Property(x => x.Markdown).HasColumnType("longtext").IsRequired();
-                b.Property(x => x.CategoryId).HasColumnType("int");
-                b.Property(x => x.CreationTime).HasColumnType("datetime");
-            });
-
-            builder.Entity<Category>(b =>
-            {
-                b.ToTable(PopularConsts.DbTablePrefix + BlogDbConsts.DbTableName.Categories);
-                b.HasKey(x => x.Id);
-                b.Property(x => x.CategoryName).HasMaxLength(50).IsRequired();
-                b.Property(x => x.DisplayName).HasMaxLength(50).IsRequired();
-            });
-
-            builder.Entity<Tag>(b =>
-            {
-                b.ToTable(PopularConsts.DbTablePrefix + BlogDbConsts.DbTableName.Tags);
-                b.HasKey(x => x.Id);
-                b.Property(x => x.TagName).HasMaxLength(50).IsRequired();
-                b.Property(x => x.DisplayName).HasMaxLength(50).IsRequired();
-            });
-
-            builder.Entity<PostTag>(b =>
-            {
-                b.ToTable(PopularConsts.DbTablePrefix + BlogDbConsts.DbTableName.PostTags);
-                b.HasKey(x => x.Id);
-                b.Property(x => x.PostId).HasColumnType("int").IsRequired();
-                b.Property(x => x.TagId).HasColumnType("int").IsRequired();
-            });
-            builder.Entity<FriendLink>(b =>
-            {
-                b.ToTable(PopularConsts.DbTablePrefix + BlogDbConsts.DbTableName.Friendlinks);
-                b.HasKey(x => x.Id);
-                b.Property(x => x.Title).HasMaxLength(20).IsRequired();
-                b.Property(x => x.LinkUrl).HasMaxLength(100).IsRequired();
-            });
-            #endregion
 
             #region PopularSys
 
@@ -102,13 +55,18 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.Vehicle);
                 b.HasKey(x => x.Id);
                 b.HasIndex(x => x.License).IsUnique();
-                //b.Property(x => x.License).HasMaxLength(20).IsRequired();
+                b.HasIndex(x => x.InteriorCode).IsUnique();
+                b.Property(x => x.UnitId).HasColumnType("int");
+                b.Property(x => x.Purpose).HasColumnType("int");
                 b.Property(x => x.Color).HasMaxLength(10);
                 b.Property(x => x.EngineNo).HasMaxLength(50);
                 b.Property(x => x.Vin).HasMaxLength(50);
                 b.Property(x => x.VehicleType).HasColumnType("int");
+                b.Property(x => x.Displacement).HasMaxLength(10);
                 b.Property(x => x.Price).HasColumnType("decimal");
                 b.Property(x => x.PurchaseDate).HasColumnType("datetime");
+                b.Property(x => x.ActivationTime).HasColumnType("datetime");
+                b.Property(x => x.IsDelete).HasColumnType("int");
                 b.Property(x => x.Remark).HasColumnType("longtext");
                 b.Property(x => x.Creator).HasColumnType("int");
                 b.Property(x => x.CreateTime).HasColumnType("datetime");
@@ -127,6 +85,25 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.Property(x => x.FileNo).HasMaxLength(12).IsRequired();
                 b.Property(x => x.Class).HasColumnType("int");
                 b.Property(x => x.FirstIssueDate).HasColumnType("datetime");
+                b.Property(x => x.IsDelete).HasColumnType("int");
+                b.Property(x => x.Remark).HasColumnType("longtext");
+                b.Property(x => x.Creator).HasColumnType("int");
+                b.Property(x => x.CreateTime).HasColumnType("datetime");
+            });
+            //单位表
+            builder.Entity<UnitEntity>(b =>
+            {
+                b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.Unit);
+                b.HasKey(x => x.Id);
+                b.HasIndex(x => x.Name).IsUnique();
+                //b.Property(x => x.Name).HasMaxLength(40).IsRequired();
+                b.Property(x => x.InteriorCode).HasMaxLength(20).IsRequired();
+                b.Property(x => x.Address);
+                b.Property(x => x.Liaison).HasMaxLength(18).IsRequired();
+                b.Property(x => x.Telephone).HasMaxLength(18).IsRequired();
+                b.Property(x => x.VehicleCount).HasColumnType("int");
+                b.Property(x => x.Position).HasMaxLength(30).IsRequired();
+                b.Property(x => x.IsDelete).HasColumnType("int");
                 b.Property(x => x.Remark).HasColumnType("longtext");
                 b.Property(x => x.Creator).HasColumnType("int");
                 b.Property(x => x.CreateTime).HasColumnType("datetime");

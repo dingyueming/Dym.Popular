@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Dym.Popular.Utils.EPPlus
 {
-    public class ExportExcelAttribute : Attribute
+    public class EPPlusColumnAttribute : Attribute
     {
-        public ExportExcelAttribute(string columnName)
+        public EPPlusColumnAttribute(string columnName)
         {
             ColumnName = columnName;
         }

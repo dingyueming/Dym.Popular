@@ -1,11 +1,8 @@
-﻿using Dym.Popular.Domain.Entities.Blogs;
-using Dym.Popular.Domain.Entities.Mis;
+﻿using Dym.Popular.Domain.Entities.Mis;
 using Dym.Popular.Domain.Entities.PopularSys;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.Modeling;
-using Volo.Abp.Identity;
 
 namespace Dym.Popular.EntityFrameworkCore
 {
@@ -30,19 +27,6 @@ namespace Dym.Popular.EntityFrameworkCore
 
         #endregion
 
-        #region Blog
-        public DbSet<Post> Posts { get; set; }
-
-        public DbSet<Category> Categories { get; set; }
-
-        public DbSet<Tag> Tags { get; set; }
-
-        public DbSet<PostTag> PostTags { get; set; }
-
-        public DbSet<FriendLink> FriendLinks { get; set; }
-
-        #endregion
-
         #region Mis
         /// <summary>
         /// 车辆
@@ -52,7 +36,10 @@ namespace Dym.Popular.EntityFrameworkCore
         /// 驾驶员
         /// </summary>
         public DbSet<DriverEntity> Driver { get; set; }
-
+        /// <summary>
+        /// 单位（基地）
+        /// </summary>
+        public DbSet<UnitEntity> Unit { get; set; }
         #endregion
 
 

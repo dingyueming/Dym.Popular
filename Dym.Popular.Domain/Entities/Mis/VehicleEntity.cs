@@ -6,12 +6,31 @@ using Volo.Abp.Domain.Entities;
 
 namespace Dym.Popular.Domain.Entities.Mis
 {
-    public class VehicleEntity : Entity<int>
+    public class VehicleEntity : PopularBaseEntity<int>
     {
+        public VehicleEntity()
+        {
+        }
+        public VehicleEntity(int id)
+        {
+            base.Id = id;
+        }
         /// <summary>
         /// 车牌号
         /// </summary>
         public string License { get; set; }
+        /// <summary>
+        /// 内部编号
+        /// </summary>
+        public string InteriorCode { get; set; }
+        /// <summary>
+        /// 所属基地
+        /// </summary>
+        public int UnitId { get; set; }
+        /// <summary>
+        /// 车辆用途
+        /// </summary>
+        public int Purpose { get; set; }
         /// <summary>
         /// 车辆颜色
         /// </summary>
@@ -21,7 +40,7 @@ namespace Dym.Popular.Domain.Entities.Mis
         /// </summary>
         public string EngineNo { get; set; }
         /// <summary>
-        /// 车架号
+        /// 车辆型号
         /// </summary>
         public string Vin { get; set; }
         /// <summary>
@@ -29,24 +48,21 @@ namespace Dym.Popular.Domain.Entities.Mis
         /// </summary>
         public int VehicleType { get; set; }
         /// <summary>
+        /// 排量
+        /// </summary>
+        public string Displacement { get; set; }
+        /// <summary>
         /// 购车价格
         /// </summary>
         public decimal Price { get; set; }
         /// <summary>
-        /// 采购日期
+        /// 购车时间
         /// </summary>
         public DateTime PurchaseDate { get; set; }
         /// <summary>
-        /// 备注
+        /// 投入使用时间
         /// </summary>
-        public string Remark { get; set; }
-        /// <summary>
-        /// 创建人
-        /// </summary>
-        public int Creator { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime CreateTime { get; set; }
+        public DateTime ActivationTime { get; set; }
+        public UnitEntity Unit { get; set; }
     }
 }

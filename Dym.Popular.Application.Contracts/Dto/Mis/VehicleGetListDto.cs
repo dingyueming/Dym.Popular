@@ -10,5 +10,9 @@ namespace Dym.Popular.Application.Contracts.Dto.Mis
         public string Vin { get; set; }
 
         public string License { get; set; }
+
+        public int IsDelete { get; set; }
+
+        public int? UnitId { get; set; }
     }
 }

@@ -6,12 +6,28 @@ using Volo.Abp.Domain.Entities;
 
 namespace Dym.Popular.Domain.Entities.Mis
 {
-    public class DriverEntity : Entity<int>
+    public class DriverEntity : PopularBaseEntity<int>
     {
         /// <summary>
         /// 姓名
         /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// 单位
+        /// </summary>
+        public int UnitId { get; set; }
+        /// <summary>
+        /// 入职时间
+        /// </summary>
+        public DateTime Hiredate { get; set; }
+        /// <summary>
+        /// 员工状态
+        /// </summary>
+        public int Status { get; set; }
+        /// <summary>
+        /// 联系地址
+        /// </summary>
+        public string Address { get; set; }
         /// <summary>
         /// 性别
         /// </summary>
@@ -44,17 +60,5 @@ namespace Dym.Popular.Domain.Entities.Mis
         /// 初始领证日期
         /// </summary>
         public DateTime FirstIssueDate { get; set; }
-        /// <summary>
-        /// 备注
-        /// </summary>
-        public string Remark { get; set; }
-        /// <summary>
-        /// 创建人
-        /// </summary>
-        public int Creator { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime CreateTime { get; set; }
     }
 }

@@ -1,12 +1,5 @@
 ﻿using AutoMapper;
-using Dym.Popular.Application.Contracts.Dto.Blog;
-using Dym.Popular.Application.Contracts.Dto.Mis;
-using Dym.Popular.Domain.Entities.Blogs;
-using Dym.Popular.Domain.Entities.Mis;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
+using System.Linq;
 
 namespace Dym.Popular.Application
 {
@@ -14,15 +7,27 @@ namespace Dym.Popular.Application
     {
         public PopularAutoMapperProfile()
         {
-            CreateMap<Post, PostDto>();
-            CreateMap<PostDto, Post>().ForMember(x => x.Id, opt => opt.Ignore());
-
-            CreateMap<VehicleEntity, VehicleDto>();
-            CreateMap<VehicleEntity, VehicleExportDto>();
-            CreateMap<VehicleDto, VehicleEntity>();
-
-            CreateMap<DriverEntity, DriverDto>();
-            CreateMap<VehicleDto, VehicleEntity>();
+            SetMapperInstence();
+        }
+        /// <summary>
+        /// 实体和扩展实体映射初始化
+        /// </summary>
+        private void SetMapperInstence()
+        {
+            var entityAassembly = System.Reflection.Assembly.Load("Dym.Popular.Domain");
+            var exEntityAassembly = System.Reflection.Assembly.Load("Dym.Popular.Application.Contracts");
+            var entityTypes = entityAassembly.GetTypes();
+            var exEntityTypes = exEntityAassembly.GetTypes();
+            foreach (var entityType in entityTypes)
+            {
+                var exTypeName = entityType.Name.Replace("Entity", "") + "Dto";
+                var listExEntityType = exEntityTypes.Where(x => x.Name == exTypeName).ToList();
+                foreach (var exEntityType in listExEntityType)
+                {
+                    CreateMap(entityType, exEntityType);
+                    CreateMap(exEntityType, entityType);
+                }
+            }
         }
     }
 }

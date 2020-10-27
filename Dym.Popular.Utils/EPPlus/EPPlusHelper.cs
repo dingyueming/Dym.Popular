@@ -125,17 +125,12 @@ namespace Dym.Popular.Utils.EPPlus
                 }
                 //添加列名及对应类型 
                 {
-                    var attribute = item.GetCustomAttribute<ExportExcelAttribute>();
+                    var attribute = item.GetCustomAttribute<EPPlusColumnAttribute>();
                     if (attribute != null)
                     {
                         dt.Columns.Add(attribute.ColumnName, colType);
                     }
-                    else
-                    {
-                        dt.Columns.Add(item.Name, colType);
-                    }
                 }
-
             }
             foreach (var item in list)
             {
@@ -151,13 +146,13 @@ namespace Dym.Popular.Utils.EPPlus
                     {
                         continue;
                     }
-                    var columnName = proInfo.Name;
-                    var attribute = proInfo.GetCustomAttribute<ExportExcelAttribute>();
+                    var attribute = proInfo.GetCustomAttribute<EPPlusColumnAttribute>();
                     if (attribute != null)
                     {
-                        columnName = attribute.ColumnName;
+                        var columnName = attribute.ColumnName;
+                        dr[columnName] = obj;
                     }
-                    dr[columnName] = obj;
+
                 }
                 dt.Rows.Add(dr);
             }

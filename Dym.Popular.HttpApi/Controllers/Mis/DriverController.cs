@@ -5,19 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Dym.Popular.Domain.Shared;
-using System.Collections.Generic;
 using Volo.Abp.Application.Dtos;
 
 namespace Dym.Popular.HttpApi.Controllers.Mis
 {
     [ApiExplorerSettings(GroupName = ApiGrouping.GroupName_Mis)]
-    public class VehicleController : PopularController
+    public class DriverController : PopularController
     {
-        private readonly IVehicleService _vehicleService;
+        private readonly IDriverService _driverService;
 
-        public VehicleController(IVehicleService vehicleService)
+        public DriverController(IDriverService driverService)
         {
-            _vehicleService = vehicleService;
+            _driverService = driverService;
         }
 
         /// <summary>
@@ -26,11 +25,11 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<PopularResult<string>> InsertAsync([FromBody] VehicleDto dto)
+        public async Task<PopularResult<string>> InsertAsync([FromBody] DriverDto dto)
         {
             dto.Creator = LoginUser.Id;
             dto.CreateTime = LoginUser.SysteDate;
-            return await _vehicleService.InsertAsync(dto);
+            return await _driverService.InsertAsync(dto);
         }
         /// <summary>
         /// 删除
@@ -40,7 +39,7 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         [HttpDelete]
         public async Task<PopularResult> DeleteAsync([Required] int id)
         {
-            return await _vehicleService.DeleteAsync(id);
+            return await _driverService.DeleteAsync(id);
         }
 
         /// <summary>
@@ -50,9 +49,9 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<PopularResult<string>> UpdateAsync([FromBody] VehicleDto dto)
+        public async Task<PopularResult<string>> UpdateAsync([FromBody] DriverDto dto)
         {
-            return await _vehicleService.UpdateAsync(dto);
+            return await _driverService.UpdateAsync(dto);
         }
 
         /// <summary>
@@ -61,9 +60,9 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PopularResult<VehicleDto>> GetAsync([Required] int id)
+        public async Task<PopularResult<DriverDto>> GetAsync([Required] int id)
         {
-            return await _vehicleService.GetAsync(id);
+            return await _driverService.GetAsync(id);
         }
 
         /// <summary>
@@ -76,16 +75,14 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         /// <returns></returns>
         [HttpGet]
         [Route("Page")]
-        public async Task<PopularResult<PagedResultDto<VehicleDto>>> GetPageAsync(int page, int limit, string license, string vin, int? unitId, int isDelete)
+        public async Task<PopularResult<PagedResultDto<DriverDto>>> GetAsync(int page, int limit, string name, int unitId)
         {
-            return await _vehicleService.GetListAsync(new VehicleGetListDto()
+            return await _driverService.GetListAsync(new DriverGetListDto()
             {
                 SkipCount = (page - 1) * limit,
                 MaxResultCount = limit,
-                License = license,
-                Vin = vin,
-                UnitId = unitId,
-                IsDelete = isDelete
+                Name = name,
+                UnitId = unitId
             });
         }
 
@@ -99,32 +96,15 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         /// <returns></returns>
         [HttpGet]
         [Route("Export")]
-        public async Task<PopularResult<byte[]>> GetExportAsync(int page, int limit, string license, string vin, int? unitId, int isDelete)
+        public async Task<PopularResult<byte[]>> GetExportAsync(int page, int limit, string name, int unitId)
         {
-            return await _vehicleService.GetBytesAsync(new VehicleGetListDto()
+            return await _driverService.GetBytesAsync(new DriverGetListDto()
             {
                 SkipCount = (page - 1) * limit,
                 MaxResultCount = limit,
-                License = license,
-                Vin = vin,
-                UnitId = unitId,
-                IsDelete = isDelete
+                Name = name,
+                UnitId = unitId
             });
-        }
-
-        /// <summary>
-        /// 导入
-        /// </summary>
-        /// <param name="page"></param>
-        /// <param name="limit"></param>
-        /// <param name="license"></param>
-        /// <param name="vin"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("Import")]
-        public async Task<PopularResult> PostAsync([FromBody] List<VehicleDto> dto)
-        {
-            return await _vehicleService.BatchInsertAsync(dto);
         }
     }
 }
