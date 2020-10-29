@@ -27,8 +27,10 @@ namespace Dym.Popular.HttpApi.Controllers
         {
             get
             {
-                var user = new UserInfo();
-                user.SysteDate = DateTime.Now;
+                var user = new UserInfo
+                {
+                    SysteDate = DateTime.Now
+                };
                 var authResult = HttpContext.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme).Result;
                 if (authResult.Succeeded)
                 {

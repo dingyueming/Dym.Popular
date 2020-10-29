@@ -88,9 +88,9 @@ namespace Dym.Popular.Application.Implements.Mis
                   .WhereIf(!dto.Vin.IsNullOrWhiteSpace(), vehicle => vehicle.Vin.Contains(dto.Vin))
                   .WhereIf(dto.UnitId.HasValue, vehicle => vehicle.UnitId == dto.UnitId);
 
-            var query = from v in await AsyncExecuter.ToListAsync(queryable.PageBy(dto.SkipCount, dto.MaxResultCount))
+            var query = from v in queryable.PageBy(dto.SkipCount, dto.MaxResultCount)
                         join
-                        u in await AsyncExecuter.ToListAsync(_unitRepository.WhereIf(dto.UnitId != 0, unit => unit.Id == dto.UnitId))
+                        u in _unitRepository.WhereIf(dto.UnitId.HasValue, unit => unit.Id == dto.UnitId)
                         on v.UnitId equals u.Id
                         into cls
                         from c in cls.DefaultIfEmpty()
@@ -133,9 +133,9 @@ namespace Dym.Popular.Application.Implements.Mis
                   .WhereIf(!dto.Vin.IsNullOrWhiteSpace(), vehicle => vehicle.Vin.Contains(dto.Vin))
                   .WhereIf(dto.UnitId.HasValue, vehicle => vehicle.UnitId == dto.UnitId);
 
-            var query = from v in await AsyncExecuter.ToListAsync(queryable.PageBy(dto.SkipCount, dto.MaxResultCount))
+            var query = from v in queryable.PageBy(dto.SkipCount, dto.MaxResultCount)
                         join
-                        u in await AsyncExecuter.ToListAsync(_unitRepository.WhereIf(dto.UnitId != 0, unit => unit.Id == dto.UnitId))
+                        u in _unitRepository.WhereIf(dto.UnitId.HasValue, unit => unit.Id == dto.UnitId)
                         on v.UnitId equals u.Id
                         into cls
                         from c in cls.DefaultIfEmpty()
@@ -160,7 +160,7 @@ namespace Dym.Popular.Application.Implements.Mis
                             Unit = c
                         };
 
-            var vehicles = query.ToList();
+            var vehicles = await Task.FromResult(query.ToList());
 
             //转换为导出对象
             var dtos = ObjectMapper.Map<List<VehicleEntity>, List<VehicleDto>>(vehicles);
@@ -178,14 +178,14 @@ namespace Dym.Popular.Application.Implements.Mis
             var vehicles = ObjectMapper.Map<List<VehicleDto>, List<VehicleEntity>>(dtos);
             //基地名称转换为ID
             var units = await _unitRepository.GetListAsync();
-            foreach (var x in dtos)
-            {
-                if (!units.Any(u => u.Name == x.UnitName))
-                {
-                    result.Failed("未找到基地：" + x.UnitName);
-                    return result;
-                }
-            }
+            //foreach (var x in dtos)
+            //{
+            //    if (!units.Any(u => u.Name == x.UnitName))
+            //    {
+            //        result.Failed("未找到基地：" + x.UnitName);
+            //        return result;
+            //    }
+            //}
             await _vehicleRepository.BulkInsertAsync(vehicles);
             return result;
         }

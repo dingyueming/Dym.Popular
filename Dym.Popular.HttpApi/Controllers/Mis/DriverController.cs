@@ -75,7 +75,7 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         /// <returns></returns>
         [HttpGet]
         [Route("Page")]
-        public async Task<PopularResult<PagedResultDto<DriverDto>>> GetAsync(int page, int limit, string name, int unitId)
+        public async Task<PopularResult<PagedResultDto<DriverDto>>> GetPageAsync(int page, int limit, string name, int unitId)
         {
             return await _driverService.GetListAsync(new DriverGetListDto()
             {

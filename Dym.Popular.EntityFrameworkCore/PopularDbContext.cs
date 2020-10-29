@@ -31,15 +31,24 @@ namespace Dym.Popular.EntityFrameworkCore
         /// <summary>
         /// 车辆
         /// </summary>
-        public DbSet<VehicleEntity> Vehicle { get; set; }
+        public DbSet<VehicleEntity> Vehicles { get; set; }
         /// <summary>
         /// 驾驶员
         /// </summary>
-        public DbSet<DriverEntity> Driver { get; set; }
+        public DbSet<DriverEntity> Drivers { get; set; }
         /// <summary>
         /// 单位（基地）
         /// </summary>
-        public DbSet<UnitEntity> Unit { get; set; }
+        public DbSet<UnitEntity> Units { get; set; }
+        /// <summary>
+        /// 单位（基地）
+        /// </summary>
+        public DbSet<DictTypeEntity> DictTypes { get; set; }
+        /// <summary>
+        /// 单位（基地）
+        /// </summary>
+        public DbSet<DictEntity> Dicts { get; set; }
+
         #endregion
 
 

@@ -22,7 +22,7 @@ namespace Dym.Popular.Application.Contracts.Dto.Mis
         public int UnitId { get; set; }
         [EPPlusColumn("所属基地")]
         [IgnoreMap]
-        public string UnitName { get => Unit == null ? "" : Unit.Name; set => UnitName = value; }
+        public string UnitName { get => Unit == null ? "" : Unit.Name; }
         public UnitDto Unit { get; set; }
         /// <summary>
         /// 车辆用途

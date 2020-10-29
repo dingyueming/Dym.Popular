@@ -65,7 +65,7 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.Property(x => x.Displacement).HasMaxLength(10);
                 b.Property(x => x.Price).HasColumnType("decimal");
                 b.Property(x => x.PurchaseDate).HasColumnType("datetime");
-                b.Property(x => x.ActivationTime).HasColumnType("datetime");
+                b.Property(x => x.ActivationTime).HasColumnType("datetime").HasDefaultValue();
                 b.Property(x => x.IsDelete).HasColumnType("int");
                 b.Property(x => x.Remark).HasColumnType("longtext");
                 b.Property(x => x.Creator).HasColumnType("int");
@@ -78,11 +78,10 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.HasKey(x => x.Id);
                 b.Property(x => x.Name).HasMaxLength(20).IsRequired();
                 b.Property(x => x.Sex).HasMaxLength(10).IsRequired();
-                b.Property(x => x.Birthday).HasColumnType("datetime");
                 b.Property(x => x.IdNo).HasMaxLength(18).IsRequired();
-                b.Property(x => x.Height).HasColumnType("int");
-                b.Property(x => x.Weight).HasColumnType("int");
-                b.Property(x => x.FileNo).HasMaxLength(12).IsRequired();
+                b.Property(x => x.Status).HasColumnType("int");
+                b.Property(x => x.Hiredate).HasColumnType("datetime");
+                b.Property(x => x.UnitId).HasColumnType("int");
                 b.Property(x => x.Class).HasColumnType("int");
                 b.Property(x => x.FirstIssueDate).HasColumnType("datetime");
                 b.Property(x => x.IsDelete).HasColumnType("int");
@@ -96,17 +95,32 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.Unit);
                 b.HasKey(x => x.Id);
                 b.HasIndex(x => x.Name).IsUnique();
-                //b.Property(x => x.Name).HasMaxLength(40).IsRequired();
                 b.Property(x => x.InteriorCode).HasMaxLength(20).IsRequired();
-                b.Property(x => x.Address);
-                b.Property(x => x.Liaison).HasMaxLength(18).IsRequired();
-                b.Property(x => x.Telephone).HasMaxLength(18).IsRequired();
+                b.Property(x => x.Address).HasMaxLength(500);
+                b.Property(x => x.Liaison).HasMaxLength(18);
+                b.Property(x => x.Telephone).HasMaxLength(18);
                 b.Property(x => x.VehicleCount).HasColumnType("int");
-                b.Property(x => x.Position).HasMaxLength(30).IsRequired();
+                b.Property(x => x.Position).HasMaxLength(30);
                 b.Property(x => x.IsDelete).HasColumnType("int");
                 b.Property(x => x.Remark).HasColumnType("longtext");
                 b.Property(x => x.Creator).HasColumnType("int");
                 b.Property(x => x.CreateTime).HasColumnType("datetime");
+            });
+            //字典类型表
+            builder.Entity<DictTypeEntity>(b =>
+            {
+                b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.DictType);
+                b.HasKey(x => x.Id);
+                b.HasIndex(x => x.Name).IsUnique();
+            });
+            //字典表
+            builder.Entity<DictEntity>(b =>
+            {
+                b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.Dict);
+                b.HasKey(x => x.Id);
+                b.Property(x => x.Value).IsRequired();
+                b.Property(x => x.Key).HasColumnType("int");
+                b.Property(x => x.DictTypeId).HasColumnType("int");
             });
             #endregion
         }

@@ -3,15 +3,17 @@ using System;
 using Dym.Popular.EntityFrameworkCore.DbMigrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 {
     [DbContext(typeof(PopularMigrationsDbContext))]
-    partial class PopularMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201028084944_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,13 +27,10 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("DictTypeEntityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DictTypeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Key")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Value")
@@ -39,8 +38,6 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DictTypeEntityId");
 
                     b.ToTable("App_Mis_Dict");
                 });
@@ -324,13 +321,6 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("App_Popular_User");
-                });
-
-            modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.DictEntity", b =>
-                {
-                    b.HasOne("Dym.Popular.Domain.Entities.Mis.DictTypeEntity", null)
-                        .WithMany("Dicts")
-                        .HasForeignKey("DictTypeEntityId");
                 });
 
             modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.DriverEntity", b =>

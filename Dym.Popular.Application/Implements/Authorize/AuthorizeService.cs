@@ -22,10 +22,8 @@ namespace Dym.Popular.Application.Implements.Authorize
 {
     public class AuthorizeService : PopularAppService, IAuthorizeService
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        public AuthorizeService(IHttpContextAccessor httpContextAccessor)
+        public AuthorizeService()
         {
-            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<PopularResult<string>> GenerateTokenAsync(string uid, string pwd)
         {

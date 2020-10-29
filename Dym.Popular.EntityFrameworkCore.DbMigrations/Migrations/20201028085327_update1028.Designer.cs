@@ -10,8 +10,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 {
     [DbContext(typeof(PopularMigrationsDbContext))]
-    [Migration("20201014072650_update1014")]
-    partial class update1014
+    [Migration("20201028085327_update1028")]
+    partial class update1028
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,123 +21,47 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Dym.Popular.Domain.Entities.Blogs.Category", b =>
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.DictEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
+                    b.Property<int?>("DictTypeEntityId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("DisplayName")
+                    b.Property<int>("Key")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
-                    b.ToTable("App_Categories");
+                    b.HasIndex("DictTypeEntityId");
+
+                    b.ToTable("App_Mis_Dict");
                 });
 
-            modelBuilder.Entity("Dym.Popular.Domain.Entities.Blogs.FriendLink", b =>
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.DictTypeEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("LinkUrl")
-                        .IsRequired()
-                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("varchar(20) CHARACTER SET utf8mb4")
-                        .HasMaxLength(20);
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
-                    b.ToTable("App_Friendlinks");
-                });
+                    b.HasIndex("Name")
+                        .IsUnique();
 
-            modelBuilder.Entity("Dym.Popular.Domain.Entities.Blogs.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Author")
-                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
-                        .HasMaxLength(10);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Html")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Markdown")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
-                        .HasMaxLength(100);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("App_Posts");
-                });
-
-            modelBuilder.Entity("Dym.Popular.Domain.Entities.Blogs.PostTag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("App_Post_Tags");
-                });
-
-            modelBuilder.Entity("Dym.Popular.Domain.Entities.Blogs.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("DisplayName")
-                        .IsRequired()
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("TagName")
-                        .IsRequired()
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("App_Tags");
+                    b.ToTable("App_Mis_DictType");
                 });
 
             modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.DriverEntity", b =>
@@ -146,8 +70,8 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime");
+                    b.Property<string>("Address")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("Class")
                         .HasColumnType("int");
@@ -158,21 +82,19 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                     b.Property<int>("Creator")
                         .HasColumnType("int");
 
-                    b.Property<string>("FileNo")
-                        .IsRequired()
-                        .HasColumnType("varchar(12) CHARACTER SET utf8mb4")
-                        .HasMaxLength(12);
-
                     b.Property<DateTime>("FirstIssueDate")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("Height")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Hiredate")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("IdNo")
                         .IsRequired()
                         .HasColumnType("varchar(18) CHARACTER SET utf8mb4")
                         .HasMaxLength(18);
+
+                    b.Property<int>("IsDelete")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -186,12 +108,70 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                         .HasColumnType("int")
                         .HasMaxLength(10);
 
-                    b.Property<int>("Weight")
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UnitId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UnitId");
+
                     b.ToTable("App_Mis_Driver");
+                });
+
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.UnitEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("varchar(500) CHARACTER SET utf8mb4")
+                        .HasMaxLength(500);
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("Creator")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InteriorCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(20) CHARACTER SET utf8mb4")
+                        .HasMaxLength(20);
+
+                    b.Property<int>("IsDelete")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Liaison")
+                        .HasColumnType("varchar(18) CHARACTER SET utf8mb4")
+                        .HasMaxLength(18);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("Remark")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Telephone")
+                        .HasColumnType("varchar(18) CHARACTER SET utf8mb4")
+                        .HasMaxLength(18);
+
+                    b.Property<int>("VehicleCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("App_Mis_Unit");
                 });
 
             modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.VehicleEntity", b =>
@@ -199,6 +179,11 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("ActivationTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValue(null);
 
                     b.Property<string>("Color")
                         .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
@@ -210,14 +195,22 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                     b.Property<int>("Creator")
                         .HasColumnType("int");
 
+                    b.Property<string>("Displacement")
+                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
+                        .HasMaxLength(10);
+
                     b.Property<string>("EngineNo")
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
+                    b.Property<string>("InteriorCode")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.Property<int>("IsDelete")
+                        .HasColumnType("int");
+
                     b.Property<string>("License")
-                        .IsRequired()
-                        .HasColumnType("varchar(20) CHARACTER SET utf8mb4")
-                        .HasMaxLength(20);
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal");
@@ -225,8 +218,14 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                     b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("Purpose")
+                        .HasColumnType("int");
+
                     b.Property<string>("Remark")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("UnitId")
+                        .HasColumnType("int");
 
                     b.Property<int>("VehicleType")
                         .HasColumnType("int");
@@ -236,6 +235,14 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InteriorCode")
+                        .IsUnique();
+
+                    b.HasIndex("License")
+                        .IsUnique();
+
+                    b.HasIndex("UnitId");
 
                     b.ToTable("App_Mis_Vehicle");
                 });
@@ -319,6 +326,31 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("App_Popular_User");
+                });
+
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.DictEntity", b =>
+                {
+                    b.HasOne("Dym.Popular.Domain.Entities.Mis.DictTypeEntity", null)
+                        .WithMany("Dicts")
+                        .HasForeignKey("DictTypeEntityId");
+                });
+
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.DriverEntity", b =>
+                {
+                    b.HasOne("Dym.Popular.Domain.Entities.Mis.UnitEntity", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.VehicleEntity", b =>
+                {
+                    b.HasOne("Dym.Popular.Domain.Entities.Mis.UnitEntity", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

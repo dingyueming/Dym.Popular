@@ -22,8 +22,12 @@ namespace Dym.Popular.Domain.Shared
         /// </summary>
         public const string Unit = "_Mis_Unit";
         /// <summary>
-        /// 消费表
+        /// 字典类型表
         /// </summary>
-        public const string Menu = "_Mis_Cost";
+        public const string DictType = "_Mis_DictType";
+        /// <summary>
+        /// 字典表
+        /// </summary>
+        public const string Dict = "_Mis_Dict";
     }
 }
