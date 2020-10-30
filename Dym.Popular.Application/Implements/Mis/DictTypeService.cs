@@ -52,6 +52,7 @@ namespace Dym.Popular.Application.Implements.Mis
         {
             var result = new PopularResult<string>();
             var dictType = ObjectMapper.Map<DictTypeDto, DictTypeEntity>(dto);
+            await _dictRepository.DeleteAsync(x => x.DictTypeId == dto.Id);
             await _dictTypeRepository.UpdateAsync(dictType);
             result.Success("更新成功");
             return result;
@@ -94,7 +95,7 @@ namespace Dym.Popular.Application.Implements.Mis
             var queryable = _dictTypeRepository
                   .WhereIf(!dto.Name.IsNullOrWhiteSpace(), dictType => dictType.Name.Contains(dto.Name));
 
-            var dictTypes = await AsyncExecuter.ToListAsync(queryable.PageBy(dto.SkipCount, dto.MaxResultCount));
+            var dictTypes = await _dictTypeRepository.GetPagedAsync(dto.Name, dto.SkipCount, dto.MaxResultCount);
 
             var totalCount = await AsyncExecuter.CountAsync(queryable);
 
