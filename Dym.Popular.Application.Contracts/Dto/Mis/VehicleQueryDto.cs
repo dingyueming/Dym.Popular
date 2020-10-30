@@ -5,7 +5,7 @@ using Volo.Abp.Application.Dtos;
 
 namespace Dym.Popular.Application.Contracts.Dto.Mis
 {
-    public class VehicleGetListDto : PagedAndSortedResultRequestDto
+    public class VehicleQueryDto : PagedAndSortedResultRequestDto
     {
         public string Vin { get; set; }
 

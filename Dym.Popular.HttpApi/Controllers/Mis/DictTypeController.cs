@@ -5,18 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Dym.Popular.Domain.Shared;
+using System.Collections.Generic;
 using Volo.Abp.Application.Dtos;
 
 namespace Dym.Popular.HttpApi.Controllers.Mis
 {
     [ApiExplorerSettings(GroupName = ApiGrouping.GroupName_Mis)]
-    public class DriverController : PopularController
+    public class DictTypeController : PopularController
     {
-        private readonly IDriverService _driverService;
+        private readonly IDictTypeService _dictService;
 
-        public DriverController(IDriverService driverService)
+        public DictTypeController(IDictTypeService dictService)
         {
-            _driverService = driverService;
+            _dictService = dictService;
         }
 
         /// <summary>
@@ -25,11 +26,9 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<PopularResult<string>> InsertAsync([FromBody] DriverDto dto)
+        public async Task<PopularResult<string>> InsertAsync([FromBody] DictTypeDto dto)
         {
-            dto.Creator = LoginUser.Id;
-            dto.CreateTime = LoginUser.SysteDate;
-            return await _driverService.InsertAsync(dto);
+            return await _dictService.InsertAsync(dto);
         }
         /// <summary>
         /// 删除
@@ -39,7 +38,7 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         [HttpDelete]
         public async Task<PopularResult> DeleteAsync([Required] int id)
         {
-            return await _driverService.DeleteAsync(id);
+            return await _dictService.DeleteAsync(id);
         }
 
         /// <summary>
@@ -49,9 +48,9 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<PopularResult<string>> UpdateAsync([FromBody] DriverDto dto)
+        public async Task<PopularResult<string>> UpdateAsync([FromBody] DictTypeDto dto)
         {
-            return await _driverService.UpdateAsync(dto);
+            return await _dictService.UpdateAsync(dto);
         }
 
         /// <summary>
@@ -60,9 +59,20 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PopularResult<DriverDto>> GetAsync([Required] int id)
+        public async Task<PopularResult<DictTypeDto>> GetAsync([Required] int id)
         {
-            return await _driverService.GetAsync(id);
+            return await _dictService.GetAsync(id);
+        }
+
+        /// <summary>
+        /// 查询所有
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("All")]
+        public async Task<PopularResult<List<DictTypeDto>>> GetAllAsync()
+        {
+            return await _dictService.GetAllAsync();
         }
 
         /// <summary>
@@ -75,35 +85,13 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         /// <returns></returns>
         [HttpGet]
         [Route("Page")]
-        public async Task<PopularResult<PagedResultDto<DriverDto>>> GetPageAsync(int page, int limit, string name, int unitId)
+        public async Task<PopularResult<PagedResultDto<DictTypeDto>>> GetAsync(int page, int limit, string interiorCode, string name)
         {
-            return await _driverService.GetListAsync(new DriverQueryDto()
+            return await _dictService.GetListAsync(new DictTypeQueryDto()
             {
                 SkipCount = (page - 1) * limit,
                 MaxResultCount = limit,
-                Name = name,
-                UnitId = unitId
-            });
-        }
-
-        /// <summary>
-        /// 导出查询
-        /// </summary>
-        /// <param name="page"></param>
-        /// <param name="limit"></param>
-        /// <param name="license"></param>
-        /// <param name="vin"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("Export")]
-        public async Task<PopularResult<byte[]>> GetExportAsync(int page, int limit, string name, int unitId)
-        {
-            return await _driverService.GetBytesAsync(new DriverQueryDto()
-            {
-                SkipCount = (page - 1) * limit,
-                MaxResultCount = limit,
-                Name = name,
-                UnitId = unitId
+                Name = name
             });
         }
     }

@@ -6,7 +6,7 @@ namespace Dym.Popular.Domain.IRepositories.Mis
     /// <summary>
     /// IRepository
     /// </summary>
-    public interface IDriverRepository : IRepository<DriverEntity, int>
+    public interface IDictTypeRepository : IRepository<DictTypeEntity, int>
     {
     }
 }

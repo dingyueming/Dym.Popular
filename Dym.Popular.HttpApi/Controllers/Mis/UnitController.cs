@@ -89,7 +89,7 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         [Route("Page")]
         public async Task<PopularResult<PagedResultDto<UnitDto>>> GetAsync(int page, int limit, string interiorCode, string name)
         {
-            return await _unitService.GetListAsync(new UnitGetListDto()
+            return await _unitService.GetListAsync(new UnitQueryDto()
             {
                 SkipCount = (page - 1) * limit,
                 MaxResultCount = limit,
@@ -110,7 +110,7 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         [Route("Export")]
         public async Task<PopularResult<byte[]>> GetExportAsync(int page, int limit, string interiorCode, string name)
         {
-            return await _unitService.GetBytesAsync(new UnitGetListDto()
+            return await _unitService.GetBytesAsync(new UnitQueryDto()
             {
                 SkipCount = (page - 1) * limit,
                 MaxResultCount = limit,

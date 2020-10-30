@@ -5,10 +5,10 @@ using Volo.Abp.Application.Dtos;
 
 namespace Dym.Popular.Application.Contracts.Dto.Mis
 {
-    public class DriverGetListDto : PagedAndSortedResultRequestDto
+    public class UnitQueryDto : PagedAndSortedResultRequestDto
     {
         public string Name { get; set; }
 
-        public int UnitId { get; set; }
+        public string InteriorCode { get; set; }
     }
 }

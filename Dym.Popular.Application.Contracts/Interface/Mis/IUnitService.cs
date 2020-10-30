@@ -19,8 +19,8 @@ namespace Dym.Popular.Application.Contracts.Interface.Mis
 
         Task<PopularResult<List<UnitDto>>> GetAllAsync();
 
-        Task<PopularResult<PagedResultDto<UnitDto>>> GetListAsync(UnitGetListDto dto);
+        Task<PopularResult<PagedResultDto<UnitDto>>> GetListAsync(UnitQueryDto dto);
 
-        Task<PopularResult<byte[]>> GetBytesAsync(UnitGetListDto dto);
+        Task<PopularResult<byte[]>> GetBytesAsync(UnitQueryDto dto);
     }
 }

@@ -4,7 +4,7 @@ using Volo.Abp.Domain.Repositories;
 namespace Dym.Popular.Domain.IRepositories.Mis
 {
     /// <summary>
-    /// IPostRepository
+    /// IRepository
     /// </summary>
     public interface IUnitRepository : IRepository<UnitEntity, int>
     {

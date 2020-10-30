@@ -6,7 +6,7 @@ using Volo.Abp.Application.Dtos;
 
 namespace Dym.Popular.Application.Contracts.Dto.Mis
 {
-    public class UnitDto : PopularBaseEntityDto<int>
+    public class UnitDto : PopularBaseDto<int>
     {
         /// <summary>
         /// 单位名

@@ -25,22 +25,16 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("DictTypeEntityId")
-                        .HasColumnType("int");
-
                     b.Property<int>("DictTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Key")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DictTypeEntityId");
+                    b.HasIndex("DictTypeId");
 
                     b.ToTable("App_Mis_Dict");
                 });
@@ -330,7 +324,9 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                 {
                     b.HasOne("Dym.Popular.Domain.Entities.Mis.DictTypeEntity", null)
                         .WithMany("Dicts")
-                        .HasForeignKey("DictTypeEntityId");
+                        .HasForeignKey("DictTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.DriverEntity", b =>

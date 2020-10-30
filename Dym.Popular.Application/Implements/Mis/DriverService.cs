@@ -68,7 +68,7 @@ namespace Dym.Popular.Application.Implements.Mis
             return result;
         }
 
-        public async Task<PopularResult<PagedResultDto<DriverDto>>> GetListAsync(DriverGetListDto dto)
+        public async Task<PopularResult<PagedResultDto<DriverDto>>> GetListAsync(DriverQueryDto dto)
         {
             var result = new PopularResult<PagedResultDto<DriverDto>>();
 
@@ -85,7 +85,7 @@ namespace Dym.Popular.Application.Implements.Mis
             return result;
         }
 
-        public async Task<PopularResult<byte[]>> GetBytesAsync(DriverGetListDto dto)
+        public async Task<PopularResult<byte[]>> GetBytesAsync(DriverQueryDto dto)
         {
             var result = new PopularResult<byte[]>();
 

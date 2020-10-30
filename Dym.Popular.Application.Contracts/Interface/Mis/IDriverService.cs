@@ -16,8 +16,8 @@ namespace Dym.Popular.Application.Contracts.Interface.Mis
 
         Task<PopularResult<DriverDto>> GetAsync(int id);
 
-        Task<PopularResult<PagedResultDto<DriverDto>>> GetListAsync(DriverGetListDto dto);
+        Task<PopularResult<PagedResultDto<DriverDto>>> GetListAsync(DriverQueryDto dto);
 
-        Task<PopularResult<byte[]>> GetBytesAsync(DriverGetListDto dto);
+        Task<PopularResult<byte[]>> GetBytesAsync(DriverQueryDto dto);
     }
 }

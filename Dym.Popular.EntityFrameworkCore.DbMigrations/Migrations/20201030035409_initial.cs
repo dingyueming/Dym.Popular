@@ -9,21 +9,6 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "App_Mis_Dict",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Key = table.Column<int>(type: "int", nullable: false),
-                    Value = table.Column<string>(nullable: false),
-                    TypeId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_App_Mis_Dict", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "App_Mis_DictType",
                 columns: table => new
                 {
@@ -100,6 +85,26 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "App_Mis_Dict",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: false),
+                    DictTypeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_App_Mis_Dict", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_App_Mis_Dict_App_Mis_DictType_DictTypeId",
+                        column: x => x.DictTypeId,
+                        principalTable: "App_Mis_DictType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "App_Mis_Driver",
                 columns: table => new
                 {
@@ -165,6 +170,11 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_App_Mis_Dict_DictTypeId",
+                table: "App_Mis_Dict",
+                column: "DictTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_App_Mis_DictType_Name",
                 table: "App_Mis_DictType",
                 column: "Name",
@@ -205,9 +215,6 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                 name: "App_Mis_Dict");
 
             migrationBuilder.DropTable(
-                name: "App_Mis_DictType");
-
-            migrationBuilder.DropTable(
                 name: "App_Mis_Driver");
 
             migrationBuilder.DropTable(
@@ -218,6 +225,9 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 
             migrationBuilder.DropTable(
                 name: "App_Popular_User");
+
+            migrationBuilder.DropTable(
+                name: "App_Mis_DictType");
 
             migrationBuilder.DropTable(
                 name: "App_Mis_Unit");

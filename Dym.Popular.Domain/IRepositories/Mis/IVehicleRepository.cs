@@ -6,7 +6,7 @@ using Volo.Abp.Domain.Repositories;
 namespace Dym.Popular.Domain.IRepositories.Mis
 {
     /// <summary>
-    /// IPostRepository
+    /// IRepository
     /// </summary>
     public interface IVehicleRepository : IRepository<VehicleEntity, int>
     {

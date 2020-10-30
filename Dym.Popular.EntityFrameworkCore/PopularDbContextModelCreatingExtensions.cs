@@ -1,8 +1,7 @@
-﻿using Dym.Popular.Domain.Entities.PopularSys;
-using Dym.Popular.Domain.Entities.Mis;
+﻿using Dym.Popular.Domain.Entities.Mis;
+using Dym.Popular.Domain.Entities.PopularSys;
 using Dym.Popular.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
-using System;
 using Volo.Abp;
 
 namespace Dym.Popular.EntityFrameworkCore
@@ -112,15 +111,14 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.DictType);
                 b.HasKey(x => x.Id);
                 b.HasIndex(x => x.Name).IsUnique();
+                b.HasMany(x => x.Dicts).WithOne().HasForeignKey("DictTypeId");
             });
             //字典表
             builder.Entity<DictEntity>(b =>
             {
                 b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.Dict);
                 b.HasKey(x => x.Id);
-                b.Property(x => x.Value).IsRequired();
-                b.Property(x => x.Key).HasColumnType("int");
-                b.Property(x => x.DictTypeId).HasColumnType("int");
+                b.Property(x => x.Name).IsRequired();
             });
             #endregion
         }

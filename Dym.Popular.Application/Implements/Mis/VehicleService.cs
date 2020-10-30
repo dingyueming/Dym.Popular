@@ -79,7 +79,7 @@ namespace Dym.Popular.Application.Implements.Mis
             return result;
         }
 
-        public async Task<PopularResult<PagedResultDto<VehicleDto>>> GetListAsync(VehicleGetListDto dto)
+        public async Task<PopularResult<PagedResultDto<VehicleDto>>> GetListAsync(VehicleQueryDto dto)
         {
             var result = new PopularResult<PagedResultDto<VehicleDto>>();
 
@@ -124,7 +124,7 @@ namespace Dym.Popular.Application.Implements.Mis
             return result;
         }
 
-        public async Task<PopularResult<byte[]>> GetBytesAsync(VehicleGetListDto dto)
+        public async Task<PopularResult<byte[]>> GetBytesAsync(VehicleQueryDto dto)
         {
             var result = new PopularResult<byte[]>();
 

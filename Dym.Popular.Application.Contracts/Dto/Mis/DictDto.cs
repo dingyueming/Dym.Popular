@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Dym.Popular.Utils.EPPlus;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Volo.Abp.Domain.Entities;
+using Volo.Abp.Application.Dtos;
 
-namespace Dym.Popular.Domain.Entities.Mis
+namespace Dym.Popular.Application.Contracts.Dto.Mis
 {
-    public class DictEntity : Entity<int>
+    public class DictDto : EntityDto<int>
     {
         /// <summary>
         /// 字典值

@@ -4,7 +4,7 @@ using System;
 
 namespace Dym.Popular.Application.Contracts.Dto.Mis
 {
-    public class DriverDto : PopularBaseEntityDto<int>
+    public class DriverDto : PopularBaseDto<int>
     {
         /// <summary>
         /// 姓名

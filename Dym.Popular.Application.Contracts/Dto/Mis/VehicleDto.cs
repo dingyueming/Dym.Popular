@@ -4,7 +4,7 @@ using System;
 
 namespace Dym.Popular.Application.Contracts.Dto.Mis
 {
-    public class VehicleDto : PopularBaseEntityDto<int>
+    public class VehicleDto : PopularBaseDto<int>
     {
         /// <summary>
         /// 车牌号

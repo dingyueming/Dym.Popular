@@ -5,7 +5,7 @@ using Volo.Abp.Application.Dtos;
 
 namespace Dym.Popular.Application.Contracts.Dto
 {
-    public class PopularBaseEntityDto<T> : EntityDto<T>
+    public class PopularBaseDto<T> : EntityDto<T>
     {
         /// <summary>
         /// 是否删除
