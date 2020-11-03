@@ -1,13 +1,13 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Volo.Abp.Domain.Entities;
+﻿using System;
 
 namespace Dym.Popular.Domain.Entities.Mis
 {
     public class DriverEntity : PopularBaseEntity<int>
     {
+        public DriverEntity(int id)
+        {
+            base.Id = id;
+        }
         /// <summary>
         /// 姓名
         /// </summary>
@@ -31,7 +31,11 @@ namespace Dym.Popular.Domain.Entities.Mis
         /// <summary>
         /// 员工状态
         /// </summary>
-        public int Status { get; set; }
+        public int StatusId { get; set; }
+        /// <summary>
+        /// 员工状态
+        /// </summary>
+        public DictEntity Status { get; set; }
         /// <summary>
         /// 联系地址
         /// </summary>
@@ -43,7 +47,11 @@ namespace Dym.Popular.Domain.Entities.Mis
         /// <summary>
         /// 准驾车型
         /// </summary>
-        public int Class { get; set; }
+        public int ClassId { get; set; }
+        /// <summary>
+        /// 准驾车型
+        /// </summary>
+        public DictEntity Class { get; set; }
         /// <summary>
         /// 初始领证日期
         /// </summary>

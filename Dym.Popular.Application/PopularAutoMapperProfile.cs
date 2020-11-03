@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Dym.Popular.Application.Contracts.Dto.Mis;
 using System.Linq;
 
 namespace Dym.Popular.Application
@@ -17,15 +18,26 @@ namespace Dym.Popular.Application
             var entityAassembly = System.Reflection.Assembly.Load("Dym.Popular.Domain");
             var exEntityAassembly = System.Reflection.Assembly.Load("Dym.Popular.Application.Contracts");
             var entityTypes = entityAassembly.GetTypes();
-            var exEntityTypes = exEntityAassembly.GetTypes();
+            var dtoTypes = exEntityAassembly.GetTypes();
             foreach (var entityType in entityTypes)
             {
-                var exTypeName = entityType.Name.Replace("Entity", "") + "Dto";
-                var listExEntityType = exEntityTypes.Where(x => x.Name == exTypeName).ToList();
-                foreach (var exEntityType in listExEntityType)
+                var dtoTypeName = entityType.Name.Replace("Entity", "") + "Dto";
+                var dtoTypeList = dtoTypes.Where(x => x.Name == dtoTypeName).ToList();
+                foreach (var dtoType in dtoTypeList)
                 {
-                    CreateMap(entityType, exEntityType);
-                    CreateMap(exEntityType, entityType);
+                    CreateMap(entityType, dtoType);
+                    switch (dtoType.Name)
+                    {
+                        case nameof(DriverDto):
+                            CreateMap(dtoType, entityType).ForMember("Unit", x => x.Ignore()).ForMember("Class", x => x.Ignore()).ForMember("Status", x => x.Ignore());
+                            break;
+                        case nameof(VehicleDto):
+                            CreateMap(dtoType, entityType).ForMember("Unit", x => x.Ignore());
+                            break;
+                        default:
+                            CreateMap(dtoType, entityType);
+                            break;
+                    }
                 }
             }
         }

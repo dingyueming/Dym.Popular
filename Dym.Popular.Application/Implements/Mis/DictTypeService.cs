@@ -62,7 +62,7 @@ namespace Dym.Popular.Application.Implements.Mis
         {
             var result = new PopularResult<DictTypeDto>();
 
-            var dictType = await _dictTypeRepository.GetAsync(id);
+            var dictType = await _dictTypeRepository.GetAsync(id, true);
             if (dictType == null)
             {
                 result.Failed("数据不存在");

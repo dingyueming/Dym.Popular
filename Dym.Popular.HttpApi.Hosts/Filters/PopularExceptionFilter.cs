@@ -22,7 +22,7 @@ namespace Dym.Popular.HttpApi.Hosts.Extensions
             var result = new PopularResult()
             {
                 Code = PopularResultCodeEnum.Failed,
-                Message = context.Exception.InnerException.Message
+                Message = context.Exception.InnerException == null ? context.Exception.Message : context.Exception.InnerException.Message
             };
             context.Result = new JsonResult(result);
         }

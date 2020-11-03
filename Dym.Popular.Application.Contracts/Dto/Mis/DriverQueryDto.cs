@@ -9,6 +9,10 @@ namespace Dym.Popular.Application.Contracts.Dto.Mis
     {
         public string Name { get; set; }
 
-        public int UnitId { get; set; }
+        public string IdNo { get; set; }
+
+        public int IsDelete { get; set; }
+
+        public int? UnitId { get; set; }
     }
 }

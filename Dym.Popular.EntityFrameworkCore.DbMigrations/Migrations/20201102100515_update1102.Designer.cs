@@ -3,15 +3,17 @@ using System;
 using Dym.Popular.EntityFrameworkCore.DbMigrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 {
     [DbContext(typeof(PopularMigrationsDbContext))]
-    partial class PopularMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201102100515_update1102")]
+    partial class update1102
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,17 +102,13 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                         .HasColumnType("int")
                         .HasMaxLength(10);
 
-                    b.Property<int>("StatusId")
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<int>("UnitId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClassId");
-
-                    b.HasIndex("StatusId");
 
                     b.HasIndex("UnitId");
 
@@ -335,18 +333,6 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 
             modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.DriverEntity", b =>
                 {
-                    b.HasOne("Dym.Popular.Domain.Entities.Mis.DictEntity", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Dym.Popular.Domain.Entities.Mis.DictEntity", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Dym.Popular.Domain.Entities.Mis.UnitEntity", "Unit")
                         .WithMany()
                         .HasForeignKey("UnitId")

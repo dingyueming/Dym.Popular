@@ -36,7 +36,11 @@ namespace Dym.Popular.Application.Contracts.Dto.Mis
         /// <summary>
         /// 员工状态
         /// </summary>
-        public int Status { get; set; }
+        public int StatusId { get; set; }
+        /// <summary>
+        /// 员工状态
+        /// </summary>
+        public DictDto Status { get; set; }
         /// <summary>
         /// 联系地址
         /// </summary>
@@ -44,14 +48,22 @@ namespace Dym.Popular.Application.Contracts.Dto.Mis
         /// <summary>
         /// 身份证号码
         /// </summary>
-        public string IdNo { get; set; }        
+        public string IdNo { get; set; }
         /// <summary>
         /// 准驾车型
         /// </summary>
-        public int Class { get; set; }
+        public int ClassId { get; set; }
+        /// <summary>
+        /// 准驾车型
+        /// </summary>
+        public DictDto Class { get; set; }
         /// <summary>
         /// 初始领证日期
         /// </summary>
         public DateTime FirstIssueDate { get; set; }
+        /// <summary>
+        /// 驾龄
+        /// </summary>
+        public int DrivingYears => (int)(DateTime.Now - FirstIssueDate).TotalDays / 365;
     }
 }

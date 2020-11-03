@@ -78,10 +78,10 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.Property(x => x.Name).HasMaxLength(20).IsRequired();
                 b.Property(x => x.Sex).HasMaxLength(10).IsRequired();
                 b.Property(x => x.IdNo).HasMaxLength(18).IsRequired();
-                b.Property(x => x.Status).HasColumnType("int");
+                b.Property(x => x.StatusId).HasColumnType("int");
                 b.Property(x => x.Hiredate).HasColumnType("datetime");
                 b.Property(x => x.UnitId).HasColumnType("int");
-                b.Property(x => x.Class).HasColumnType("int");
+                b.Property(x => x.ClassId).HasColumnType("int");
                 b.Property(x => x.FirstIssueDate).HasColumnType("datetime");
                 b.Property(x => x.IsDelete).HasColumnType("int");
                 b.Property(x => x.Remark).HasColumnType("longtext");

@@ -27,5 +27,15 @@ namespace Dym.Popular.EntityFrameworkCore.Repositories.Mis
 
             return await query.ToListAsync();
         }
+
+        //public override async Task<DictTypeEntity> GetAsync(int id, bool includeDetails = true, CancellationToken cancellationToken = default)
+        //{
+        //    return await DbContext.Set<DictTypeEntity>().Include(x => x.Dicts).FirstOrDefaultAsync(cancellationToken);
+        //}
+
+        public override IQueryable<DictTypeEntity> WithDetails()
+        {
+            return GetQueryable().Include(x => x.Dicts);
+        }
     }
 }
