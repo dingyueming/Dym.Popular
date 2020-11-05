@@ -120,6 +120,22 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.HasKey(x => x.Id);
                 b.Property(x => x.Name).IsRequired();
             });
+            //油料费用表
+            builder.Entity<OilCostEntity>(b =>
+            {
+                b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.OilCost);
+                b.HasKey(x => x.Id);
+                b.Property(x => x.Balance).HasColumnType("double");
+                b.Property(x => x.CardNo).HasMaxLength(20).IsRequired();
+                b.Property(x => x.Expend).HasColumnType("double");
+                b.Property(x => x.OilTypeId).HasColumnType("int");
+                b.Property(x => x.VehicleId).HasColumnType("int");
+                b.Property(x => x.RefuelingTime).HasColumnType("datetime");
+                b.Property(x => x.IsDelete).HasColumnType("int");
+                b.Property(x => x.Remark).HasColumnType("longtext");
+                b.Property(x => x.Creator).HasColumnType("int");
+                b.Property(x => x.CreateTime).HasColumnType("datetime");
+            });
             #endregion
         }
     }

@@ -29,5 +29,9 @@ namespace Dym.Popular.Domain.Shared
         /// 字典表
         /// </summary>
         public const string Dict = "_Mis_Dict";
+        /// <summary>
+        /// 油料费用表
+        /// </summary>
+        public const string OilCost = "_Mis_OilCost";
     }
 }

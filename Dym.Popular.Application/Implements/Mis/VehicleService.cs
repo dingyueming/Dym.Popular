@@ -79,6 +79,21 @@ namespace Dym.Popular.Application.Implements.Mis
             return result;
         }
 
+        public async Task<PopularResult<List<VehicleDto>>> GetAllAsync()
+        {
+            var result = new PopularResult<List<VehicleDto>>();
+
+            var vehicle = await AsyncExecuter.ToListAsync(_vehicleRepository.Where(x => x.IsDelete == 0));
+            if (vehicle == null)
+            {
+                result.Failed("数据不存在");
+                return result;
+            }
+            var dtos = ObjectMapper.Map<List<VehicleEntity>, List<VehicleDto>>(vehicle);
+            result.Success(dtos);
+            return result;
+        }
+
         public async Task<PopularResult<PagedResultDto<VehicleDto>>> GetListAsync(VehicleQueryDto dto)
         {
             var result = new PopularResult<PagedResultDto<VehicleDto>>();

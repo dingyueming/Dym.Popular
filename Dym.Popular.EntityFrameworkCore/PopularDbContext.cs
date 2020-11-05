@@ -41,14 +41,17 @@ namespace Dym.Popular.EntityFrameworkCore
         /// </summary>
         public DbSet<UnitEntity> Units { get; set; }
         /// <summary>
-        /// 单位（基地）
+        /// 字典类型
         /// </summary>
         public DbSet<DictTypeEntity> DictTypes { get; set; }
         /// <summary>
-        /// 单位（基地）
+        /// 字典
         /// </summary>
         public DbSet<DictEntity> Dicts { get; set; }
-
+        /// <summary>
+        /// 油料费用
+        /// </summary>
+        public DbSet<OilCostEntity> OilCosts { get; set; }
         #endregion
 
 
