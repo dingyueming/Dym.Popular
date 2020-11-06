@@ -4,9 +4,9 @@ namespace Dym.Popular.Domain.Entities.Mis
 {
     public class DriverEntity : PopularBaseEntity<int>
     {
-        public DriverEntity(int id)
+        public DriverEntity(int id) : base(id)
         {
-            base.Id = id;
+
         }
         /// <summary>
         /// 姓名

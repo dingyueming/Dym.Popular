@@ -8,12 +8,9 @@ namespace Dym.Popular.Domain.Entities.Mis
 {
     public class VehicleEntity : PopularBaseEntity<int>
     {
-        public VehicleEntity()
+        public VehicleEntity(int id) : base(id)
         {
-        }
-        public VehicleEntity(int id)
-        {
-            base.Id = id;
+
         }
         /// <summary>
         /// 车牌号

@@ -136,6 +136,20 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.Property(x => x.Creator).HasColumnType("int");
                 b.Property(x => x.CreateTime).HasColumnType("datetime");
             });
+            //车辆里程表
+            builder.Entity<VehicleMileageEntity>(b =>
+            {
+                b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.VehicleMileage);
+                b.HasKey(x => x.Id);
+                b.Property(x => x.FileName).HasMaxLength(20).IsRequired();
+                b.Property(x => x.Mileage).HasColumnType("int");
+                b.Property(x => x.VehicleId).HasColumnType("int");
+                b.Property(x => x.RecordDate).HasColumnType("datetime");
+                b.Property(x => x.IsDelete).HasColumnType("int");
+                b.Property(x => x.Remark).HasColumnType("longtext");
+                b.Property(x => x.Creator).HasColumnType("int");
+                b.Property(x => x.CreateTime).HasColumnType("datetime");
+            });
             #endregion
         }
     }

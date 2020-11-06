@@ -10,9 +10,9 @@ namespace Dym.Popular.Domain.Entities.Mis
     /// </summary>
     public class OilCostEntity : PopularBaseEntity<int>
     {
-        public OilCostEntity(int id)
+        public OilCostEntity(int id) : base(id)
         {
-            base.Id = id;
+
         }
         /// <summary>
         /// 加油卡卡号

@@ -33,5 +33,9 @@ namespace Dym.Popular.Domain.Shared
         /// 油料费用表
         /// </summary>
         public const string OilCost = "_Mis_OilCost";
+        /// <summary>
+        /// 里程表
+        /// </summary>
+        public const string VehicleMileage = "_Mis_VehicleMileage";
     }
 }

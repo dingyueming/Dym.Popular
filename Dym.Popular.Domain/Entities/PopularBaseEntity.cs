@@ -7,6 +7,14 @@ namespace Dym.Popular.Domain.Entities
 {
     public class PopularBaseEntity<T> : Entity<T>
     {
+        protected PopularBaseEntity() : base()
+        {
+
+        }
+        protected PopularBaseEntity(T id) : base(id)
+        {
+
+        }
         /// <summary>
         /// 是否删除（报废）
         /// </summary>
