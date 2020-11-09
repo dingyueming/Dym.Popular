@@ -3,15 +3,17 @@ using System;
 using Dym.Popular.EntityFrameworkCore.DbMigrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 {
     [DbContext(typeof(PopularMigrationsDbContext))]
-    partial class PopularMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201109061428_update1109")]
+    partial class update1109
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,49 +117,6 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                     b.HasIndex("UnitId");
 
                     b.ToTable("App_Mis_Driver");
-                });
-
-            modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.MaintenanceEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("CostTypeId")
-                        .HasColumnType("int")
-                        .HasMaxLength(20);
-
-                    b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("Creator")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Expend")
-                        .HasColumnType("double");
-
-                    b.Property<int>("IsDelete")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RecordTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("VehicleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CostTypeId");
-
-                    b.HasIndex("VehicleId");
-
-                    b.ToTable("App_Mis_Maintenance");
                 });
 
             modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.OilCostEntity", b =>
@@ -479,21 +438,6 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                     b.HasOne("Dym.Popular.Domain.Entities.Mis.UnitEntity", "Unit")
                         .WithMany()
                         .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Dym.Popular.Domain.Entities.Mis.MaintenanceEntity", b =>
-                {
-                    b.HasOne("Dym.Popular.Domain.Entities.Mis.DictEntity", "CostType")
-                        .WithMany()
-                        .HasForeignKey("CostTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Dym.Popular.Domain.Entities.Mis.VehicleEntity", "Vehicle")
-                        .WithMany()
-                        .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -37,5 +37,9 @@ namespace Dym.Popular.Domain.Shared
         /// 里程表
         /// </summary>
         public const string VehicleMileage = "_Mis_VehicleMileage";
+        /// <summary>
+        /// 维修保养表
+        /// </summary>
+        public const string Maintenance = "_Mis_Maintenance";
     }
 }

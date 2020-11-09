@@ -21,8 +21,13 @@ namespace Dym.Popular.EntityFrameworkCore
         //public DbSet<AppUser> Users { get; set; }
 
         #region PopularSys
+        /// <summary>
+        /// 用户
+        /// </summary>
         public DbSet<UserEntity> User { get; set; }
-
+        /// <summary>
+        /// 角色
+        /// </summary>
         public DbSet<RoleEntity> Role { get; set; }
 
         #endregion
@@ -52,6 +57,14 @@ namespace Dym.Popular.EntityFrameworkCore
         /// 油料费用
         /// </summary>
         public DbSet<OilCostEntity> OilCosts { get; set; }
+        /// <summary>
+        /// 油料费用
+        /// </summary>
+        public DbSet<VehicleMileageEntity> VehicleMileages { get; set; }
+        /// <summary>
+        /// 油料费用
+        /// </summary>
+        public DbSet<MaintenanceEntity> Maintenances { get; set; }
         #endregion
 
 

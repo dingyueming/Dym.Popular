@@ -150,6 +150,21 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.Property(x => x.Creator).HasColumnType("int");
                 b.Property(x => x.CreateTime).HasColumnType("datetime");
             });
+            //维修保养表
+            builder.Entity<MaintenanceEntity>(b =>
+            {
+                b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.Maintenance);
+                b.HasKey(x => x.Id);
+                b.Property(x => x.CostTypeId).HasMaxLength(20).IsRequired();
+                b.Property(x => x.Expend).HasColumnType("double");
+                b.Property(x => x.Address);
+                b.Property(x => x.VehicleId).HasColumnType("int");
+                b.Property(x => x.RecordTime).HasColumnType("datetime");
+                b.Property(x => x.IsDelete).HasColumnType("int");
+                b.Property(x => x.Remark).HasColumnType("longtext");
+                b.Property(x => x.Creator).HasColumnType("int");
+                b.Property(x => x.CreateTime).HasColumnType("datetime");
+            });
             #endregion
         }
     }
