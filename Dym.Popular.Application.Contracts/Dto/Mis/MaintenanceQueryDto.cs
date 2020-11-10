@@ -4,7 +4,7 @@ using System;
 
 namespace Dym.Popular.Application.Contracts.Dto.Mis
 {
-    public class MaintenanceQueryDto : PopularBaseQueryDto
+    public class MaintenanceQueryDto : PopularPagedQueryDto
     {
         public string License { get; set; }
     }

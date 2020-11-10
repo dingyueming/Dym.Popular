@@ -81,7 +81,7 @@ namespace Dym.Popular.Application.Implements.Mis
             var countQuery = _maintenanceRepository.Where(x => x.IsDelete == dto.IsDelete);
             //.WhereIf(!dto.License.IsNullOrWhiteSpace(), maintenance => maintenance.Vehicle.License.Contains(dto.License));
 
-            var query = from m in _maintenanceRepository.OrderBy(x => x.CreateTime).PageBy(dto.SkipCount, dto.MaxResultCount).Where(x => x.IsDelete == dto.IsDelete)
+            var query = from m in _maintenanceRepository.OrderBy(x => x.CreateTime).PageBy(dto.ToSkipCount(), dto.ToMaxResultCount()).Where(x => x.IsDelete == dto.IsDelete)
                         join v in _vehicleRepository on m.VehicleId equals v.Id into cls
                         from c in cls.DefaultIfEmpty()
                         join d in _dictRepository on m.CostTypeId equals d.Id into md
