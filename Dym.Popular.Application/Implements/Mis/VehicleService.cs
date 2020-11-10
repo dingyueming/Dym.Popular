@@ -10,7 +10,6 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
 
 namespace Dym.Popular.Application.Implements.Mis
 {
@@ -18,9 +17,16 @@ namespace Dym.Popular.Application.Implements.Mis
     {
         private readonly IVehicleRepository _vehicleRepository;
         private readonly IUnitRepository _unitRepository;
+        private readonly IOilCostRepository _oilCostRepoitory;
+        private readonly IVehicleMileageRepository _vehicleMileageRepository;
+        private readonly IMaintenanceRepository _maintenanceRepository;
 
-        public VehicleService(IVehicleRepository vehicleRepository, IUnitRepository unitRepository)
+        public VehicleService(IMaintenanceRepository maintenanceRepository, IVehicleMileageRepository vehicleMileageRepository
+            , IOilCostRepository oilCostRepoitory, IVehicleRepository vehicleRepository, IUnitRepository unitRepository)
         {
+            _oilCostRepoitory = oilCostRepoitory;
+            _vehicleMileageRepository = vehicleMileageRepository;
+            _maintenanceRepository = maintenanceRepository;
             _unitRepository = unitRepository;
             _vehicleRepository = vehicleRepository;
         }
@@ -202,6 +208,32 @@ namespace Dym.Popular.Application.Implements.Mis
             //    }
             //}
             await _vehicleRepository.BulkInsertAsync(vehicles);
+            return result;
+        }
+
+        public async Task<PopularResult<List<VeComStaDto>>> GetVeComStaAsync(VeComStaQueryDto dto)
+        {
+            var result = new PopularResult<List<VeComStaDto>>();
+            var oilCostQuery = _oilCostRepoitory.Where(x => x.RefuelingTime >= dto.StartTime && x.RefuelingTime <= dto.EndTime).GroupBy(x => x.VehicleId).Select(x => new { VeId = x.Key, OilCost = x.Sum(i => i.Expend) });
+            var mileageQuery = _vehicleMileageRepository.Where(x => x.RecordDate >= dto.StartTime && x.RecordDate <= dto.EndTime).GroupBy(x => x.VehicleId).Select(x => new { VeId = x.Key, Mileage = x.Sum(i => i.Mileage) });
+            var maintenanceExpendQuery = _maintenanceRepository.Where(x => x.RecordTime >= dto.StartTime && x.RecordTime <= dto.EndTime).GroupBy(x => x.VehicleId).Select(x => new { VeId = x.Key, maintenanceExpend = x.Sum(i => i.Expend) });
+            var all = from v in _vehicleRepository.Where(x => x.IsDelete == 0)
+                      join oil in oilCostQuery on v.Id equals oil.VeId into voil
+                      from newvoil in voil.DefaultIfEmpty()
+                      join mil in mileageQuery on v.Id equals mil.VeId into vmil
+                      from newvmil in vmil.DefaultIfEmpty()
+                      join mai in maintenanceExpendQuery on v.Id equals mai.VeId into vmai
+                      from newvmai in vmai.DefaultIfEmpty()
+                      select new VeComStaDto()
+                      {
+                          License = v.License,
+                          OilCost = newvoil.OilCost,
+                          Mileage = newvmil.Mileage,
+                          Maintenance = newvmai.maintenanceExpend
+                      };
+
+            var list = await AsyncExecuter.ToListAsync(all);
+            result.Success(list);
             return result;
         }
     }

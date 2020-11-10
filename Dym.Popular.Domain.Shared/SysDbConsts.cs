@@ -7,7 +7,7 @@ namespace Dym.Popular.Domain.Shared
     /// <summary>
     /// 数据库常量
     /// </summary>
-    public static class PopularDbConsts
+    public static class SysDbConsts
     {
         /// <summary>
         /// 用户表

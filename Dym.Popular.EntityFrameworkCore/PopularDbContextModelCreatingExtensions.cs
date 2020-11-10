@@ -19,7 +19,7 @@ namespace Dym.Popular.EntityFrameworkCore
             //用户表
             builder.Entity<UserEntity>(b =>
             {
-                b.ToTable(PopularConsts.DbTablePrefix + PopularDbConsts.User);
+                b.ToTable(PopularConsts.DbTablePrefix + SysDbConsts.User);
                 b.HasKey(x => x.Id);
                 b.Property(x => x.UserName).HasMaxLength(20).IsRequired();
                 b.Property(x => x.Password).HasMaxLength(100).IsRequired();
@@ -35,7 +35,7 @@ namespace Dym.Popular.EntityFrameworkCore
             //角色表
             builder.Entity<RoleEntity>(b =>
             {
-                b.ToTable(PopularConsts.DbTablePrefix + PopularDbConsts.Role);
+                b.ToTable(PopularConsts.DbTablePrefix + SysDbConsts.Role);
                 b.HasKey(x => x.Id);
                 b.Property(x => x.RoleName).HasMaxLength(20).IsRequired();
                 b.Property(x => x.RoleDescription).HasMaxLength(100);

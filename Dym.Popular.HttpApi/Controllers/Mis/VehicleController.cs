@@ -138,5 +138,17 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         {
             return await _vehicleService.BatchInsertAsync(dto);
         }
+
+        /// <summary>
+        /// 车辆综合统计查询
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("ComprehensiveSq")]
+        public async Task<PopularResult<List<VeComStaDto>>> GetSqAsync([FromQuery] VeComStaQueryDto dto)
+        {
+            return await _vehicleService.GetVeComStaAsync(dto);
+        }
     }
 }
