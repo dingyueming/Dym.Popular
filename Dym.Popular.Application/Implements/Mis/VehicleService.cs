@@ -4,6 +4,7 @@ using Dym.Popular.Domain.Entities.Mis;
 using Dym.Popular.Domain.IRepositories.Mis;
 using Dym.Popular.Domain.Shared.Result;
 using Dym.Popular.Utils.EPPlus;
+using Microsoft.JSInterop.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -56,7 +57,7 @@ namespace Dym.Popular.Application.Implements.Mis
             }
             vehicle.License += "-删除";
             vehicle.InteriorCode += "-删除";
-            vehicle.IsDelete = 1;
+            vehicle.Delete();
             await _vehicleRepository.UpdateAsync(vehicle);
             return result;
         }
@@ -215,9 +216,9 @@ namespace Dym.Popular.Application.Implements.Mis
         {
             var result = new PopularResult<List<VeComStaDto>>();
             var oilCostQuery = _oilCostRepoitory.Where(x => x.RefuelingTime >= dto.StartTime && x.RefuelingTime <= dto.EndTime).GroupBy(x => x.VehicleId).Select(x => new { VeId = x.Key, OilCost = x.Sum(i => i.Expend) });
-            var mileageQuery = _vehicleMileageRepository.Where(x => x.RecordDate >= dto.StartTime && x.RecordDate <= dto.EndTime).GroupBy(x => x.VehicleId).Select(x => new { VeId = x.Key, Mileage = x.Sum(i => i.Mileage) });
+            var mileageQuery = _vehicleMileageRepository.Where(x => x.RecordDate >= dto.StartTime && x.RecordDate <= dto.EndTime).GroupBy(x => x.VehicleId).Select(x => new { VeId = x.Key, Mileage = (x.Max(i => i.Mileage) - x.Min(i => i.Mileage)) });
             var maintenanceExpendQuery = _maintenanceRepository.Where(x => x.RecordTime >= dto.StartTime && x.RecordTime <= dto.EndTime).GroupBy(x => x.VehicleId).Select(x => new { VeId = x.Key, maintenanceExpend = x.Sum(i => i.Expend) });
-            var all = from v in _vehicleRepository.Where(x => x.IsDelete == 0)
+            var all = from v in _vehicleRepository.Where(x => x.IsDelete == 0).WhereIf(dto.UnitId.HasValue, x => x.UnitId == dto.UnitId.Value)
                       join oil in oilCostQuery on v.Id equals oil.VeId into voil
                       from newvoil in voil.DefaultIfEmpty()
                       join mil in mileageQuery on v.Id equals mil.VeId into vmil

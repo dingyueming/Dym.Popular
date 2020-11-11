@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Dym.Popular.Domain.Shared;
 using System.Collections.Generic;
 using Volo.Abp.Application.Dtos;
+using Dym.Popular.Utils.EPPlus;
 
 namespace Dym.Popular.HttpApi.Controllers.Mis
 {
@@ -149,6 +150,20 @@ namespace Dym.Popular.HttpApi.Controllers.Mis
         public async Task<PopularResult<List<VeComStaDto>>> GetSqAsync([FromQuery] VeComStaQueryDto dto)
         {
             return await _vehicleService.GetVeComStaAsync(dto);
+        }
+
+        /// <summary>
+        /// 车辆综合统计查询
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("ComprehensiveExport")]
+        public async Task<PopularResult<byte[]>> GetComprehensiveAsync([FromQuery] VeComStaQueryDto dto)
+        {
+            var result = await _vehicleService.GetVeComStaAsync(dto);
+            var ms = EPPlusHelper.GetMemoryStream(result.Data);
+            return new PopularResult<byte[]>() { Data = ms.ToArray() };
         }
     }
 }

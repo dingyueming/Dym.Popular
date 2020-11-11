@@ -9,6 +9,8 @@ namespace Dym.Popular.Application.Contracts.Dto.Mis
     /// </summary>
     public class VeComStaQueryDto
     {
+        public int? UnitId { get; set; }
+
         public DateTime StartTime { get; set; }
 
         public DateTime EndTime { get; set; }

@@ -31,5 +31,13 @@ namespace Dym.Popular.Domain.Entities
         /// 创建时间
         /// </summary>
         public virtual DateTime CreateTime { get; set; }
+
+        /// <summary>
+        /// 删除操作
+        /// </summary>
+        public virtual void Delete()
+        {
+            IsDelete = 1;
+        }
     }
 }

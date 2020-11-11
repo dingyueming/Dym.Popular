@@ -40,7 +40,14 @@ namespace Dym.Popular.Application.Implements.Mis
         public async Task<PopularResult> DeleteAsync(int id)
         {
             var result = new PopularResult();
-            await _unitRepository.DeleteAsync(id);
+            var unit = await _unitRepository.GetAsync(id);
+            if (unit == null)
+            {
+                result.Failed("数据不存在");
+                return result;
+            }
+            unit.Delete();
+            await _unitRepository.UpdateAsync(unit);
             return result;
         }
 
@@ -87,7 +94,7 @@ namespace Dym.Popular.Application.Implements.Mis
         {
             var result = new PopularResult<PagedResultDto<UnitDto>>();
 
-            var queryAble = _unitRepository
+            var queryAble = _unitRepository.Where(x => x.IsDelete == 0)
                   .WhereIf(!dto.Name.IsNullOrWhiteSpace(), unit => unit.Name.Contains(dto.Name))
                   .WhereIf(!dto.InteriorCode.IsNullOrWhiteSpace(), unit => unit.InteriorCode.Contains(dto.InteriorCode));
 
