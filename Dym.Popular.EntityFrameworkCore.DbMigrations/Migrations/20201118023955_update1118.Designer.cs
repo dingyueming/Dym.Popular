@@ -3,15 +3,17 @@ using System;
 using Dym.Popular.EntityFrameworkCore.DbMigrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 {
     [DbContext(typeof(PopularMigrationsDbContext))]
-    partial class PopularMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201118023955_update1118")]
+    partial class update1118
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -393,8 +395,8 @@ namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
                     b.Property<int>("IsDelete")
                         .HasColumnType("int");
 
-                    b.Property<int>("IsOutDanger")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsOutDanger")
+                        .HasColumnType("bool");
 
                     b.Property<double>("MaintenanceCost")
                         .HasColumnType("double");

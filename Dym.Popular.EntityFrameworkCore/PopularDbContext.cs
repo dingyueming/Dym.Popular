@@ -58,13 +58,17 @@ namespace Dym.Popular.EntityFrameworkCore
         /// </summary>
         public DbSet<OilCostEntity> OilCosts { get; set; }
         /// <summary>
-        /// 油料费用
+        /// 车辆里程
         /// </summary>
         public DbSet<VehicleMileageEntity> VehicleMileages { get; set; }
         /// <summary>
-        /// 油料费用
+        /// 维修保养
         /// </summary>
         public DbSet<MaintenanceEntity> Maintenances { get; set; }
+        /// <summary>
+        /// 违章
+        /// </summary>
+        public DbSet<ViolationEntity> Violations { get; set; }
         #endregion
 
 

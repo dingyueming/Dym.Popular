@@ -165,6 +165,22 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.Property(x => x.Creator).HasColumnType("int");
                 b.Property(x => x.CreateTime).HasColumnType("datetime");
             });
+            //违章表
+            builder.Entity<ViolationEntity>(b =>
+            {
+                b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.Violation);
+                b.HasKey(x => x.Id);
+                b.Property(x => x.VehicleId).HasColumnType("int");
+                b.Property(x => x.TookDate).HasColumnType("datetime");
+                b.Property(x => x.Fine).HasColumnType("double");
+                b.Property(x => x.Indemnity).HasColumnType("double");
+                b.Property(x => x.MaintenanceCost).HasColumnType("double");
+                b.Property(x => x.IsOutDanger).HasColumnType("int");
+                b.Property(x => x.IsDelete).HasColumnType("int");
+                b.Property(x => x.Remark).HasColumnType("longtext");
+                b.Property(x => x.Creator).HasColumnType("int");
+                b.Property(x => x.CreateTime).HasColumnType("datetime");
+            });
             #endregion
         }
     }

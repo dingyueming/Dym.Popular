@@ -41,5 +41,9 @@ namespace Dym.Popular.Domain.Shared
         /// 维修保养表
         /// </summary>
         public const string Maintenance = "_Mis_Maintenance";
+        /// <summary>
+        /// 违章表
+        /// </summary>
+        public const string Violation = "_Mis_Violation";
     }
 }
