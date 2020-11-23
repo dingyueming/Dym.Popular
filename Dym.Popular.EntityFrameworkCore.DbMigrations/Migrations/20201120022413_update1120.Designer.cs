@@ -3,15 +3,17 @@ using System;
 using Dym.Popular.EntityFrameworkCore.DbMigrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace Dym.Popular.EntityFrameworkCore.DbMigrations.Migrations
 {
     [DbContext(typeof(PopularMigrationsDbContext))]
-    partial class PopularMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201120022413_update1120")]
+    partial class update1120
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

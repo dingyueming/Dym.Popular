@@ -69,6 +69,10 @@ namespace Dym.Popular.EntityFrameworkCore
         /// 违章
         /// </summary>
         public DbSet<ViolationEntity> Violations { get; set; }
+        /// <summary>
+        /// 保险
+        /// </summary>
+        public DbSet<InsuranceEntity> Insurances { get; set; }
         #endregion
 
 

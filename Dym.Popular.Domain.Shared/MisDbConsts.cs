@@ -45,5 +45,9 @@ namespace Dym.Popular.Domain.Shared
         /// 违章表
         /// </summary>
         public const string Violation = "_Mis_Violation";
+        /// <summary>
+        /// 保险表
+        /// </summary>
+        public const string Insurance = "_Mis_Insurance";
     }
 }

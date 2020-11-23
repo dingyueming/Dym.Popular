@@ -8,10 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
 
 namespace Dym.Popular.Application.Implements.Mis
 {
@@ -19,11 +17,9 @@ namespace Dym.Popular.Application.Implements.Mis
     {
         private readonly IViolationRepository _violationRepository;
         private readonly IVehicleRepository _vehicleRepository;
-        private readonly IDictRepository _dictRepository;
 
-        public ViolationService(IViolationRepository violationRepository, IVehicleRepository vehicleRepository, IDictRepository dictRepository)
+        public ViolationService(IViolationRepository violationRepository, IVehicleRepository vehicleRepository)
         {
-            _dictRepository = dictRepository;
             _violationRepository = violationRepository;
             _vehicleRepository = vehicleRepository;
         }

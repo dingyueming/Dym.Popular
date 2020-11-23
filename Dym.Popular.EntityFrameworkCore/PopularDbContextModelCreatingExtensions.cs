@@ -181,6 +181,24 @@ namespace Dym.Popular.EntityFrameworkCore
                 b.Property(x => x.Creator).HasColumnType("int");
                 b.Property(x => x.CreateTime).HasColumnType("datetime");
             });
+            //保险表
+            builder.Entity<InsuranceEntity>(b =>
+            {
+                b.ToTable(PopularConsts.DbTablePrefix + MisDbConsts.Insurance);
+                b.HasKey(x => x.Id);
+                b.Property(x => x.VehicleId).HasColumnType("int");
+                b.Property(x => x.StartDate).HasColumnType("datetime");
+                b.Property(x => x.EndDate).HasColumnType("datetime");
+                b.Property(x => x.Expend).HasColumnType("double");
+                b.Property(x => x.InsureName);
+                b.Property(x => x.InsureType);
+                b.Property(x => x.InsureNote).HasColumnType("longtext");
+                b.Property(x => x.InsureCompany);
+                b.Property(x => x.IsDelete).HasColumnType("int");
+                b.Property(x => x.Remark).HasColumnType("longtext");
+                b.Property(x => x.Creator).HasColumnType("int");
+                b.Property(x => x.CreateTime).HasColumnType("datetime");
+            });
             #endregion
         }
     }
