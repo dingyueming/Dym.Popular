@@ -16,9 +16,9 @@ namespace Dym.Popular.Domain.Entities
 
         }
         /// <summary>
-        /// 是否删除（报废）
+        /// 是否删除
         /// </summary>
-        public virtual int IsDelete { get; set; }
+        public virtual int IsDelete { get; private set; }
         /// <summary>
         /// 备注
         /// </summary>

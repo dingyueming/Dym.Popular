@@ -112,7 +112,7 @@ namespace Dym.Popular.Application.Implements.Mis
                             InsureType = m.InsureType,
                             Vehicle = c,
                             VehicleId = m.VehicleId,
-                            IsDelete = m.IsDelete,
+                            //IsDelete = m.IsDelete,
                             CreateTime = m.CreateTime,
                             Creator = m.Creator,
                             Remark = m.Remark,

@@ -91,7 +91,7 @@ namespace Dym.Popular.Application.Implements.Mis
                             RecordDate = v.RecordDate,
                             Vehicle = c,
                             VehicleId = v.VehicleId,
-                            IsDelete = v.IsDelete,
+                            //IsDelete = v.IsDelete,
                             CreateTime = v.CreateTime,
                             Creator = v.Creator,
                             Remark = v.Remark,

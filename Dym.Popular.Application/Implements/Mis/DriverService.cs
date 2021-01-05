@@ -102,7 +102,7 @@ namespace Dym.Popular.Application.Implements.Mis
                             Name = v.Name,
                             Sex = v.Sex,
                             StatusId = v.StatusId,
-                            IsDelete = v.IsDelete,
+                            //IsDelete = v.IsDelete,
                             CreateTime = v.CreateTime,
                             Creator = v.Creator,
                             Remark = v.Remark,

@@ -119,7 +119,7 @@ namespace Dym.Popular.Application.Implements.Mis
                         select new VehicleEntity(v.Id)
                         {
                             License = v.License,
-                            IsDelete = v.IsDelete,
+                            //IsDelete = v.IsDelete,
                             InteriorCode = v.InteriorCode,
                             EngineNo = v.EngineNo,
                             ActivationTime = v.ActivationTime,
@@ -164,7 +164,7 @@ namespace Dym.Popular.Application.Implements.Mis
                         select new VehicleEntity(v.Id)
                         {
                             License = v.License,
-                            IsDelete = v.IsDelete,
+                            //IsDelete = v.IsDelete,
                             InteriorCode = v.InteriorCode,
                             EngineNo = v.EngineNo,
                             ActivationTime = v.ActivationTime,

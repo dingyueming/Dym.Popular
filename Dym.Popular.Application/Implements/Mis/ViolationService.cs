@@ -89,7 +89,7 @@ namespace Dym.Popular.Application.Implements.Mis
                             MaintenanceCost = m.MaintenanceCost,
                             Vehicle = c,
                             VehicleId = m.VehicleId,
-                            IsDelete = m.IsDelete,
+                            //IsDelete = m.IsDelete,
                             CreateTime = m.CreateTime,
                             Creator = m.Creator,
                             Remark = m.Remark,
